@@ -6,3 +6,5 @@ build.log
 .fastdev.lock
 Resources/
 iOS 1.0/ti.physicalSizeCategory-android-1.0.zip
+npm-debug.log
+tmp
