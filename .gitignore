@@ -1,3 +1,8 @@
-# Build folder and log file
+.DS_Store
+.project
+.settings/
 build/
 build.log
+.fastdev.lock
+Resources/
+iOS 1.0/ti.physicalSizeCategory-android-1.0.zip
