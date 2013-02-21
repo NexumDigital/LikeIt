@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>mobi.nexum.likeit</id>
-    <name>LikeIt</name>
+    <name>Like it!</name>
     <version>1.0</version>
     <publisher>NexumDigital Inc.</publisher>
     <url>http://likeit.co/</url>
@@ -35,9 +35,8 @@
         <target device="iphone">false</target>
         <target device="mobileweb">false</target>
     </deployment-targets>
-    <sdk-version>3.0.0.GA</sdk-version>
-    <modules>
-    </modules>
+    <sdk-version>3.0.2.GA</sdk-version>
+    <modules/>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

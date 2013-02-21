@@ -1,0 +1,6 @@
+<Alloy>
+    <TableViewRow id="row_type_a">
+       <Label id="label" />
+       <View id="border" />
+    </TableViewRow>
+</Alloy>

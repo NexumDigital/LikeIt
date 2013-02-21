@@ -1,0 +1,7 @@
+<Alloy>
+    <TableViewRow id="row_type_b">
+       <ImageView id="icon" />
+       <Label id="label" />
+       <View id="border" />
+    </TableViewRow>
+</Alloy>

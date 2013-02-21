@@ -1,0 +1,11 @@
+"#start" : {
+    backgroundColor : '#fff',
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL,
+    zIndex : 20
+},
+"#logo": {
+    image : 'start/logo.png',
+    width : 244,
+    height : 90
+}

@@ -1,0 +1,7 @@
+<Alloy>
+    <View id="header">
+        <View id="back" />
+        <ImageView id="shadow" />
+        <ImageView id="left" onClick="openLeft" />
+    </View>
+</Alloy>

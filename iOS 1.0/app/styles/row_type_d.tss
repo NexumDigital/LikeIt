@@ -1,0 +1,28 @@
+"#row_type_d": {
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+    width : Ti.UI.FILL,
+    height : 65,
+    top : 0,
+    left : 0
+},
+"#label": {
+    touchEnabled : false,
+    width : 256,
+    height : 64,
+    top : 0,
+    left : 32,
+    color : '#666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14,
+        fontWeight : 'bold'
+    }
+},
+"#border": {
+    touchEnabled : false,
+    backgroundColor : '#dcdcdc',
+    width : Ti.UI.FILL,
+    height : 1,
+    bottom : 0,
+    left : 0,
+},

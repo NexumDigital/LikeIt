@@ -1,0 +1,34 @@
+"#header": {
+    width : Ti.UI.FILL,
+    top : 0,
+    height : 47,
+    zIndex : 15
+},
+"#back": {
+    backgroundColor : '#fff',
+    opacity : 0.9,
+    width : Ti.UI.FILL,
+    top : 0,
+    height : 44
+},
+"#left": {
+    image : 'header/left.png',
+    width : 56,
+    height : 44,
+    top : 0,
+    left : 0
+},
+"#right": {
+    image : 'header/right.png',
+    width : 56,
+    height : 44,
+    top : 0,
+    right : 0
+},
+"#shadow": {
+    image : 'header/shadow.png',
+    width : 1024,
+    height : 3,
+    top : 44,
+    left : 0
+},

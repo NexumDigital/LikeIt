@@ -1,0 +1,38 @@
+"#row_type_b": {
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+    backgroundColor : '#f8f8f8',
+    width : 320,
+    height : 48,
+    top : 0,
+    left : 0
+},
+"#icon": {
+    touchEnabled : false,
+    image : 'left/icon_instagram.png',
+    width : 64,
+    height : 48,
+    top : 0,
+    left : 0,
+    borderRadius : 3
+},
+"#label": {
+    touchEnabled : false,
+    width : 224,
+    height : 48,
+    top : 0,
+    left : 64,
+    color : '#666666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14,
+        fontWeight : 'bold'
+    }
+},
+"#border": {
+    touchEnabled : false,
+    backgroundColor : '#e5e5e5',
+    width : 320,
+    height : 1,
+    bottom : 0,
+    left : 0,
+},

@@ -8,4 +8,17 @@
 // accessible globally by attaching them to the `Alloy.Globals`
 // object. For example:
 //
-// Alloy.Globals.someGlobalFunction = function(){};
+// Alloy.Globals.someGlobalFunction = function(){}; 
+
+Alloy.Globals.http = require('http');
+Alloy.Globals.height = Ti.Platform.displayCaps.platformHeight - 20;
+Alloy.Globals.width = Ti.Platform.displayCaps.platformWidth;
+
+Ti.Gesture.addEventListener('orientationchange', function (e) {
+    Alloy.Globals.height = Ti.Platform.displayCaps.platformHeight - 20;
+    Alloy.Globals.width = Ti.Platform.displayCaps.platformWidth;
+});
+
+Ti.Geolocation.purpose = 'to find places near you';
+Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+Ti.Geolocation.preferredProvider = Ti.Geolocation.PROVIDER_GPS;

@@ -1,0 +1,66 @@
+".icon": {
+    width : 72,
+    height : 96,
+    top : 0,
+    left : 0
+},
+".label": {
+    color : '#fd3453',
+    width : 180,
+    height : 96,
+    top : 0,
+    left : 72,
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14,
+        fontWeight : 'bold'
+    },
+    returnKeyType : Ti.UI.RETURNKEY_SEARCH
+},
+".table": {
+    backgroundColor : 'transparent',
+    width : Ti.UI.FILL,
+    height : Ti.UI.FILL,
+    top : 97,
+    left : 0
+},
+".border": {
+    touchEnabled : false,
+    backgroundColor : '#ebebeb',
+    width : Ti.UI.FILL,
+    height : 1,
+    top : 96,
+    left : 0,
+},
+".shadow": {
+    image : 'results/shadow.png',
+    width : 6,
+    height : 1024,
+    top : 0,
+    right : 0
+},
+"#results": {
+    width : Ti.UI.FILL,
+    height : Ti.UI.FILL,
+    layout:'horizontal',
+    zIndex : 10
+},
+"#tags": {
+    backgroundColor : '#ffffff'
+},
+"#tags_icon": {
+    image : 'results/tags_icon.png',
+},
+"#people": {
+    backgroundColor : '#ffffff'
+},
+"#people_icon": {
+    image : 'results/people_icon.png',
+},
+"#places": {
+    backgroundColor : '#efefef'
+},
+"#places_icon": {
+    image : 'results/places_icon.png',
+    width : 64,
+},

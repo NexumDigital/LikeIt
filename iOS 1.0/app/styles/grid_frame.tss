@@ -1,0 +1,16 @@
+"#grid_frame": {
+    backgroundImage : 'grid/frame_back.png',
+    width : 256,
+    height : 256
+},
+"#thumb": {
+    image : '',
+    backgroundColor : '#eeeeee',
+    defaultImage : '',
+    left : 4,
+    top : 4,
+    right : 4,
+    bottom : 4,
+    width : 248,
+    height : 248
+},
