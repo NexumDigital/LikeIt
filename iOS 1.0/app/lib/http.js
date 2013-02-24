@@ -72,6 +72,9 @@ mod.onload.post = function(path_p, params_p, response_p){
     if(response_p['success']){
         switch(path_p){
             case 'sessions':
+                Alloy.Globals.index.ui_header.updateIcon('instagram');
+                Alloy.Globals.index.ui_header.updateText('Friends');
+            
                 Alloy.Globals.index.remove(Alloy.Globals.index.view_login);
                 
                 Alloy.Globals.index.ui_grid.fireEvent('resetStream', {

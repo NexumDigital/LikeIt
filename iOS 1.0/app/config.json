@@ -1,19 +1,20 @@
 {
     "global": {
-        "api_url" :         "http://dev.likeit.nexum.ws/v1/",
-        "api_timeout" :     10000,
-        "ig_client_id" :    "8c8f279095cb4c4a8c384e1cef007a3b",
-        "ig_callback" :     "http://login.nexum.ws/instagram/",
-        "ig_logout" :       "https://instagram.com/accounts/logout",
-        "ui_color" :         "fd3453",
-        "ui_font" :          "Helvetica Neue",
-        "logged" :          false
+        "api_url": "http://dev.likeit.nexum.ws/v1/",
+        "api_timeout": 1e4,
+        "ig_client_id": "8c8f279095cb4c4a8c384e1cef007a3b",
+        "ig_callback": "http://login.nexum.ws/instagram/",
+        "ig_logout": "https://instagram.com/accounts/logout",
+        "ui_color": "fd3453",
+        "ui_font": "Helvetica Neue",
+        "logged": false
     },
-    
-    "env:development": {}, 
-    "env:test": {}, 
-    "env:production": {}, 
-    "os:ios": {}, 
-    "os:android": {}, 
-    "dependencies": {}
+    "env:development": {},
+    "env:test": {},
+    "env:production": {},
+    "os:ios": {},
+    "os:android": {},
+    "dependencies": {
+        "zoom_content": "1.0"
+    }
 }

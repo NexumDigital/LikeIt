@@ -18,6 +18,32 @@
     top : 0,
     left : 0
 },
+"#title": {
+    width : Ti.UI.SIZE,
+    height : 44,
+    layout:'horizontal'
+},
+"#title_icon": {
+    touchEnabled : false,
+    image : '',
+    width : 44,
+    height : 44,
+    top : 0,
+    left : 0
+},
+"#title_text": {
+    touchEnabled : false,
+    width : Ti.UI.SIZE,
+    height : 44,
+    top : 0,
+    left : 0,
+    color : '#666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14,
+        fontWeight : 'bold'
+    }
+},
 "#right": {
     image : 'header/right.png',
     width : 56,
@@ -26,6 +52,7 @@
     right : 0
 },
 "#shadow": {
+    touchEnabled : false,
     image : 'header/shadow.png',
     width : 1024,
     height : 3,

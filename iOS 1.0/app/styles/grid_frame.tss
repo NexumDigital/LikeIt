@@ -1,11 +1,12 @@
 "#grid_frame": {
-    backgroundImage : 'grid/frame_back.png',
+    backgroundImage : '',
     width : 256,
     height : 256
 },
 "#thumb": {
+    touchEnabled : false,
     image : '',
-    backgroundColor : '#eeeeee',
+    backgroundColor : 'transparent',
     defaultImage : '',
     left : 4,
     top : 4,

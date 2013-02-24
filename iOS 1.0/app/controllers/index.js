@@ -11,6 +11,13 @@ $.index.add($.index.ui_grid);
 
 $.index.ui_overlay = null;
 
+$.index.closeOverlay = function(){
+    if(null !== $.index.ui_overlay){
+        $.index.remove($.index.ui_overlay);
+        $.index.ui_overlay = null;
+    }
+}
+
 if(!Alloy.CFG.logged){
     $.index.view_start = Alloy.createController('start').getView();
     $.index.add($.index.view_start);

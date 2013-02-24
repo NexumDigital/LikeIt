@@ -1,0 +1,7 @@
+<Alloy>
+    <View id="zoom" onSwipe="slideContent">
+        <View id="block" onClick="closeZoom" />
+        <ImageView id="holder_left" class="preload" />
+        <ImageView id="holder_right" class="preload" />
+    </View>
+</Alloy>
