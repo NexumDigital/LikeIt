@@ -25,6 +25,7 @@
 },
 "#title_icon": {
     touchEnabled : false,
+    defaultImage : '',
     image : '',
     width : 44,
     height : 44,
@@ -45,7 +46,7 @@
     }
 },
 "#right": {
-    image : 'header/right.png',
+    image : '',
     width : 56,
     height : 44,
     top : 0,

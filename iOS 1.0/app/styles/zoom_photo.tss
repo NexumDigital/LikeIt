@@ -1,0 +1,59 @@
+"#zoom_photo": {
+    backgroundColor : '#ffffff',
+    width : 640,
+    height : Ti.UI.FILL
+},
+"#buttons": {
+	opacity : 0.9,
+	width : 640,
+    height : 52,
+    top : 0,
+    left : 0,
+    layout:'horizontal',
+    zIndex : 2
+},
+"#btn_like": {
+    image : 'zoom/btn_like.png',
+    width : 320,
+    height : 48,
+    top : 0,
+    left : 0
+},
+"#btn_share": {
+    image : 'zoom/btn_share.png',
+    width : 320,
+    height : 48,
+    top : 0,
+    left : 0
+},
+"#shadow": {
+	touchEnabled : false,
+    image : 'zoom/shadow.png',
+    width : 640,
+    height : 4,
+    top : 0,
+    left : 0
+},
+"#scroll": {
+    width : 640,
+    height : Ti.UI.FILL,
+    top : 0,
+    left : 0,
+    zIndex : 1
+},
+"#photo": {
+    defaultImage : 'zoom/loading.png',
+    image : '',
+    width : 612,
+    height : 612,
+    top : 62,
+    left : 14
+},
+"#photo_overlay": {
+    image : 'zoom/photo_overlay.png',
+	opacity : 0,
+    width : 612,
+    height : 612,
+    top : 62,
+    left : 14
+},

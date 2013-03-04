@@ -1,4 +1,4 @@
-"#grid": {
+"#cover": {
 	contentHeight : Ti.UI.SIZE,
 	contentWidth : Alloy.Globals.width,
 	layout:'horizontal',

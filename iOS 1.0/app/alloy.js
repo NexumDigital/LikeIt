@@ -11,8 +11,19 @@
 // Alloy.Globals.someGlobalFunction = function(){}; 
 
 Alloy.Globals.http = require('http');
+
 Alloy.Globals.height = Ti.Platform.displayCaps.platformHeight - 20;
 Alloy.Globals.width = Ti.Platform.displayCaps.platformWidth;
+
+Alloy.Globals.data = [];
+Alloy.Globals.data.photos = [];
+Alloy.Globals.data.frames = [];
+Alloy.Globals.data.visible = [];
+Alloy.Globals.data.containers = [];
+Alloy.Globals.data.tags = [];
+Alloy.Globals.data.likes = [];
+
+Alloy.Globals.animation = require('alloy/animation');
 
 Ti.Gesture.addEventListener('orientationchange', function (e) {
     Alloy.Globals.height = Ti.Platform.displayCaps.platformHeight - 20;

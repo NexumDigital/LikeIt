@@ -1,5 +1,0 @@
-<Alloy>
-    <View id="grid_frame">
-        <ImageView id="thumb" />
-    </View>
-</Alloy>

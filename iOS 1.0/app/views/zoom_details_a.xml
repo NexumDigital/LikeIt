@@ -1,0 +1,31 @@
+<Alloy>
+	<View id="zoom_details_a">
+		<Label id="caption" />
+		<View id="details">
+			<View id="column_left">
+				<View id="author">
+					<ImageView id="profile_picture" />
+					<Label id="username" />
+					<View class="border" />
+				</View>
+				<View id="location">
+					<ImageView id="location_icon" />
+					<Label id="location_name">Location</Label>
+					<View class="border"/>
+				</View>
+				<View id="tags">
+					<ImageView id="tags_icon" />
+					<Label id="tags_name">Tags</Label>
+				</View>
+			</View>
+			<View id="column_right">
+				<View id="likes">
+					<ImageView id="likes_icon" />
+					<Label id="likes_count" />
+				</View>
+			</View>
+			<View id="border_top"/>
+			<View id="border_center" />
+		</View>
+	</View>
+</Alloy>

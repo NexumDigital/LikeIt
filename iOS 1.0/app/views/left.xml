@@ -2,10 +2,10 @@
     <View id="left">
         <View id="back" />
         <ImageView id="shadow" />
-        <ImageView id="logo" onClick="closeLeft" />
+        <ImageView id="logo" onSingletap="closeLeft" />
         <ImageView id="search_back">
             <TextField id="search_field" onReturn="doSearch" />
-            <View id="search_button" onClick="doSearch" />
+            <View id="search_button" onSingletap="doSearch" />
         </ImageView>
         <TableView id="options" onClick="openSelection" />
     </View>

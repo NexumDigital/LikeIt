@@ -1,25 +1,24 @@
 <Alloy>
-    <View id="results">
-        <View class="spacer"/>
-        <View id="tags">
-            <ImageView id="tags_icon" class="icon"/>
-            <Label class="label">TAGS</Label>
-            <View class="border"/>
-            <TableView id="tags_table" class="table" onClick="openStream" />
-            <ImageView class="shadow"/>
-        </View>
-        <View id="people">
-            <ImageView id="people_icon" class="icon"/>
-            <Label class="label">PEOPLE</Label>
-            <View class="border"/>
-            <TableView id="people_table" class="table" onClick="openStream" />
-            <ImageView class="shadow"/>
-        </View>
-        <View id="places">
-            <ImageView id="places_icon" class="icon"/>
-            <Label class="label">PLACES NEAR YOU</Label>
-            <View class="border" backgroundColor="dcdcdc"/>
-            <TableView id="places_table" class="table" onClick="openStream" />
-        </View>
-    </View>
+	<View id="results">
+		<View id="tags">
+			<ImageView id="tags_icon" class="icon"/>
+			<Label class="label">TAGS</Label>
+			<View class="border"/>
+			<TableView id="tags_table" class="table" onClick="openStream" />
+			<ImageView class="shadow"/>
+		</View>
+		<View id="people">
+			<ImageView id="people_icon" class="icon"/>
+			<Label class="label">PEOPLE</Label>
+			<View class="border"/>
+			<TableView id="people_table" class="table" onClick="openStream" />
+			<ImageView class="shadow"/>
+		</View>
+		<View id="places">
+			<ImageView id="places_icon" class="icon"/>
+			<Label class="label">PLACES NEAR YOU</Label>
+			<View class="border" backgroundColor="dcdcdc"/>
+			<TableView id="places_table" class="table" onClick="openStream" />
+		</View>
+	</View>
 </Alloy>

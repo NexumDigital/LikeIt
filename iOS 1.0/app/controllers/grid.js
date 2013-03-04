@@ -1,128 +1,191 @@
+Alloy.Globals.data.photos = [];
+Alloy.Globals.data.frames = [];
+Alloy.Globals.data.visible = [];
+Alloy.Globals.data.containers = [];
+Alloy.Globals.data.tags = [];
+Alloy.Globals.data.likes = [];
+
+$.grid.style_frame = {
+	image : '',
+	backgroundColor : 'transparent',
+	defaultImage : '',
+	left : 4,
+	top : 4,
+	right : 4,
+	bottom : 4,
+	width : 248,
+	height : 248
+};
+
+for (var i; i < 250; i++) {
+	$.grid.fireEvent('newFrame', {
+		index : i
+	});
+}
+
 function openZoom(e) {
-	if (undefined !== e.source.index) {
-		Alloy.Globals.index.ui_overlay = Alloy.createController('zoom').getView();
-		Alloy.Globals.index.add(Alloy.Globals.index.ui_overlay);
-
-		Alloy.Globals.index.ui_overlay.openPhoto(e.source.index, photos);
+	if (Alloy.Globals.data.photos[e.source.index]) {
+		Alloy.Globals.index.fireEvent('overlayAction', {
+			kind : 'zoom',
+			action : 'zoomOpenPhoto',
+			param_index : e.source.index
+		});
 	}
 }
 
-var frames = [];
-var photos = [];
-var backs = [];
-var index = 0;
-var max_frames = 324;
-var last_response = [];
-
-for (var i = 0; i < max_frames; i++) {
-	frames[i] = Alloy.createController('grid_frame').getView();
-	$.grid.add(frames[i]);
-}
-
-$.grid.addEventListener('appendPhotos', function(e) {
-	last_response = e.response;
-
-	Ti.API.info($.grid.contentOffset.y);
-	Ti.API.info($.grid.max_y);
-
-	if (2000 > ($.grid.max_y - $.grid.contentOffset.y)) {
-		if (e.response['kind'] === $.grid.kind) {
-			$.grid.more = false;
-
-			var i = index;
-
-			for (var id in e.response['photos_data']) {
-				if (i < max_frames) {
-					frames[i].updatePhoto(e.response['photos_data'][id]);
-					frames[i].index = i;
-					photos[index] = e.response['photos_data'][id];
-					index++;
-
-					$.grid.more = true;
-
-					i++;
-				}
-			}
-
-			$.grid.max_id = e.response['next_max_id'];
-
-			$.grid.contentHeight = (Math.ceil((index) / ($.grid.contentWidth / 256)) * 256) + 44;
-			$.grid.max_y = $.grid.contentHeight - Alloy.Globals.height;
-
-			$.grid.loading = false;
-			if ($.grid.more && !$.grid.loading) {
-				$.grid.loading = true;
-
-				$.grid.contentHeight = (Math.ceil((index + 24) / ($.grid.contentWidth / 256)) * 256) + 44;
-
-				Alloy.Globals.http.get('streams/instagram', {
-					kind : $.grid.kind,
-					id : $.grid.selection_id,
-					max_id : $.grid.max_id
-				});
-			}
-		}
-	} else {
-		$.grid.loading = false;
-	}
-
+$.grid.addEventListener('newFrame', function(e) {
+	Alloy.Globals.data.frames[e.index] = Ti.UI.createImageView($.grid.style_frame);
+	$.content.add(Alloy.Globals.data.frames[e.index]);
 });
 
-$.grid.addEventListener('resetStream', function(e) {
-	$.grid.contentWidth = Ti.Platform.displayCaps.platformWidth;
-	$.grid.contentHeight = ((12 / ($.grid.contentWidth / 256)) * 256) + 44;
+$.grid.addEventListener('setFrame', function(e) {
+	if (e.index !== Alloy.Globals.data.visible[e.index] && undefined !== Alloy.Globals.data.photos[e.index] && undefined !== Alloy.Globals.data.frames[e.index]) {
+		Alloy.Globals.data.frames[e.index].backgroundColor = '#eeeeee';
+		Alloy.Globals.data.frames[e.index].image = Alloy.Globals.data.photos[e.index]['urls']['306'];
+		Alloy.Globals.data.frames[e.index].index = e.index;
+		Alloy.Globals.data.visible[e.index] = e.index;
+	}
+});
+
+$.grid.addEventListener('clearFrame', function(e) {
+	Alloy.Globals.data.frames[e.index].backgroundColor = 'transparent';
+	Alloy.Globals.data.frames[e.index].image = '';
+	delete Alloy.Globals.data.visible[e.index];
+});
+
+$.grid.addEventListener('handleResponse', function(e) {
+	$.grid.more = false;
+
+	if (e.response['stream'] === $.grid.stream) {
+		for (var id in e.response['photos_data']) {
+			Alloy.Globals.data.photos[$.grid.index] = e.response['photos_data'][id];
+
+			if (undefined === Alloy.Globals.data.frames[$.grid.index]) {
+				$.grid.fireEvent('newFrame', {
+					index : $.grid.index
+				});
+			}
+
+			$.grid.index++;
+			$.grid.more = true;
+		}
+
+		$.grid.max_id = e.response['next_max_id'];
+		$.grid.fireEvent('updateVisible');
+	}
+
+	$.grid.loading = false;
+});
+
+$.grid.addEventListener('setStream', function(e) {
+	$.grid.stream = e.stream;
+	$.grid.identifier = e.identifier;
+
+	Alloy.Globals.data.photos = [];
+
+	$.grid.index = 0;
+	$.grid.scrolling = false;
+	$.grid.offset_y = 0;
+	$.grid.going_down = true;
+	$.grid.index_visible_top = 0;
+	$.grid.index_visible_top_prev = 0;
+
+	$.grid.max_id = null;
+	$.grid.more = false;
 
 	$.grid.setContentOffset({
 		y : 0
 	});
 
-	index = 0;
+	$.grid.contentHeight = Ti.UI.SIZE;
 
-	$.grid.max_id = 0;
-	$.grid.max_y = 0;
-	$.grid.more = false;
-	$.grid.loading = false;
-	$.grid.kind = e.set_kind;
-	$.grid.selection_id = e.set_selection_id;
-
-	var frames_length = frames.length;
-	for (var i = 0; i < frames_length; i++) {
-		frames[i].clearFrame();
+	for (var id in Alloy.Globals.data.visible) {
+		$.grid.fireEvent('clearFrame', {
+			index : id
+		});
 	}
 
+	Ti.API.info($.grid.stream);
+	$.grid.loading = true;
 	Alloy.Globals.http.get('streams/instagram', {
-		kind : $.grid.kind,
-		id : $.grid.selection_id
+		stream : $.grid.stream,
+		identifier : $.grid.identifier
 	});
+});
 
+$.grid.addEventListener('scrollEnd', function(e) {
+
+	for (var id in Alloy.Globals.data.visible) {
+		if (id < ($.grid.index_visible_top - 36) || id > ($.grid.index_visible_top + 48)) {
+			$.grid.fireEvent('clearFrame', {
+				index : id
+			});
+		}
+	}
+
+	if (!$.grid.more && (Math.ceil($.grid.index / ($.grid.contentWidth / 256)) * 256) + 44 !== $.grid.contentHeight)
+		$.grid.contentHeight = (Math.ceil($.grid.index / ($.grid.contentWidth / 256)) * 256) + 44;
+
+	$.grid.fireEvent('updateVisible');
+});
+
+$.grid.addEventListener('click', function(e) {
+	$.grid.fireEvent('updateVisible');
 });
 
 $.grid.addEventListener('dragEnd', function(e) {
-	if ($.grid.more && !$.grid.loading) {
-		$.grid.fireEvent('appendPhotos', {
-			response : last_response
-		});
+	$.grid.fireEvent('updateVisible');
+});
+
+$.grid.addEventListener('updateVisible', function(e) {
+	if (!$.grid.scrolling) {
+		$.grid.scrolling = true;
+
+		$.grid.offset_y = (0 <= ($.grid.contentOffset.y - 1024)) ? ($.grid.contentOffset.y - 1024) : 0;
+		$.grid.index_visible_top = (Math.ceil($.grid.contentWidth / 256) * Math.floor($.grid.offset_y / 256));
+		$.grid.going_down = (0 >= ($.grid.index_visible_top_prev - $.grid.index_visible_top)) ? true : false;
+		$.grid.index_visible_top_prev = $.grid.index_visible_top;
+
+		switch($.grid.going_down) {
+			case true:
+				for (var i = $.grid.index_visible_top; i < ($.grid.index_visible_top + 48); i++) {
+					$.grid.fireEvent('setFrame', {
+						index : i
+					});
+				}
+				break;
+			case false:
+				for (var i = $.grid.index_visible_top; i > ($.grid.index_visible_top - 36); i--) {
+					$.grid.fireEvent('setFrame', {
+						index : i
+					});
+				}
+				break;
+		}
+
+		if (undefined === Alloy.Globals.data.photos[$.grid.index_visible_top + 72]) {
+			if ($.grid.more && !$.grid.loading) {
+				$.grid.loading = true;
+				Alloy.Globals.http.get('streams/instagram', {
+					stream : $.grid.stream,
+					identifier : $.grid.identifier,
+					max_id : $.grid.max_id
+				});
+			}
+		}
+
+		$.grid.scrolling = false;
 	}
 });
 
 $.grid.addEventListener('scrollToPhoto', function(e) {
-	var new_y = ((Math.ceil((e.photo_index + 1) / ($.grid.contentWidth / 256)) * 256) - 512);
+	$.grid.offset_y = ((Math.ceil((e.photo_index + 1) / ($.grid.contentWidth / 256)) * 256) - 512);
 
-	if (new_y > 0) {
+	if ($.grid.offset_y > 0) {
 		$.grid.setContentOffset({
-			y : new_y
+			y : $.grid.offset_y
 		});
-
-		if ($.grid.more && !$.grid.loading) {
-			$.grid.fireEvent('appendPhotos', {
-				response : last_response
-			});
-		}
 	}
-});
 
-Ti.Gesture.addEventListener('orientationchange', function(e) {
-	$.grid.contentWidth = Alloy.Globals.width;
-	$.grid.contentHeight = (Math.ceil(index / ($.grid.contentWidth / 256)) * 256) + 44;
-	$.grid.max_y = $.grid.contentHeight - Alloy.Globals.height;
+	$.grid.fireEvent('updateVisible');
 });

@@ -1,0 +1,5 @@
+<Alloy>
+    <ScrollView id="cover" onSingletap="openSelection" onLongpress="deleteSelection">
+        <View id="content"/>
+    </ScrollView>
+</Alloy>

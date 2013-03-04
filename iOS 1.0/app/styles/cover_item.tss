@@ -1,0 +1,46 @@
+"#cover_item": {
+	backgroundImage : 'cover/frame_back.png',
+	left : 0,
+	top : 0,
+	width : 256,
+	height : 256
+},
+"#back" : {
+	touchEnabled : false,
+	image : 'cover/image_0.png',
+	left : 4,
+	top : 4,
+	width : 248,
+	height : 248
+},
+"#placeholder" : {
+	touchEnabled : false,
+	backgroundColor : '#ffffff',
+	opacity : 0.8,
+	width : 248,
+	height : 44,
+	bottom : 4,
+	left : 4
+},
+"#icon" : {
+	touchEnabled : false,
+	defaultImage : '',
+	image : 'cover/icon_default.png',
+	width : 36,
+	height : 44,
+	bottom : 4,
+	left : 4
+},
+"#label" : {
+	touchEnabled : false,
+	width : 176,
+	height : 28,
+	bottom : 12,
+	left : 40,
+	color : Alloy.CFG.ui_color,
+	font : {
+		fontFamily : Alloy.CFG.ui_font,
+		fontSize : 14,
+		fontWeight : 'bold'
+	}
+},

@@ -2,7 +2,3 @@
     style: Ti.UI.iPhone.TableViewStyle.PLAIN,
     separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
 },
-".spacer": {
-    width : Ti.UI.FILL,
-    height : 44
-},

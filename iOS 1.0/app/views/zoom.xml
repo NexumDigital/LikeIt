@@ -1,6 +1,6 @@
 <Alloy>
     <View id="zoom" onSwipe="slideContent">
-        <View id="block" onClick="closeZoom" />
+        <View id="block" onSingletap="closeZoom" />
         <ImageView id="holder_left" class="preload" />
         <ImageView id="holder_right" class="preload" />
     </View>

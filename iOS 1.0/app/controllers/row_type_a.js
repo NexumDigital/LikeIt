@@ -1,5 +1,5 @@
 $.row_type_a.updateLabel = function (text_p) {
-    $.label.text = text_p;
+    $.label.text = text_p.toUpperCase();
 }
 
 $.row_type_a.updateSelected = function (is_selected_p) {

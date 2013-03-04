@@ -46,18 +46,21 @@
     zIndex : 10
 },
 "#tags": {
+	top : 44,
     backgroundColor : '#ffffff'
 },
 "#tags_icon": {
     image : 'results/tags_icon.png',
 },
 "#people": {
+	top : 44,
     backgroundColor : '#ffffff'
 },
 "#people_icon": {
     image : 'results/people_icon.png',
 },
 "#places": {
+	top : 44,
     backgroundColor : '#efefef'
 },
 "#places_icon": {

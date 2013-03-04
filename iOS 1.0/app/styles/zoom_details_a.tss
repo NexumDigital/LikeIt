@@ -1,0 +1,175 @@
+".border": {
+   touchEnabled : false,
+	width : Ti.UI.fill,
+	height : 1,
+	bottom : 0,
+	left : 0,
+	backgroundColor : '#ebebeb'
+},
+"#zoom_details_a": {
+    top : 690,
+    left : 0,
+    width : 640,
+    height : Ti.UI.SIZE,
+    layout : 'horizontal'
+},
+"#caption": {
+    touchEnabled : false,
+    width : 608,
+    height : Ti.UI.SIZE,
+    bottom : 16,
+    top : 16,
+    left : 16,
+    color : '#747474',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 18
+    }
+},
+"#details": {
+    width : 608,
+    height : Ti.UI.SIZE,
+    top : 16,
+    left : 16
+},
+"#border_top": {
+	touchEnabled : false,
+    width : 608,
+    height : 1,
+    top : 0,
+    left : 0,
+    backgroundColor : '#ebebeb'
+},
+"#border_center": {
+	touchEnabled : false,
+    width : 1,
+    height : Ti.UI.FILL,
+    top : 1,
+    left : 208,
+    backgroundColor : '#ebebeb'
+},
+"#column_left": {
+	backgroundColor : '#f8f8f8',
+    width : 208,
+    height : Ti.UI.SIZE,
+    top : 0,
+    left : 0,
+    layout:'horizontal'
+},
+"#column_right": {
+    width : 400,
+    height : Ti.UI.SIZE,
+    top : 0,
+    left : 208,
+    layout:'horizontal'
+},
+"#author": {
+	backgroundColor : '#ffffff',
+    width : 208,
+    height : 64,
+    top : 0,
+    left : 0
+},
+"#profile_picture": {
+    touchEnabled : false,
+	defaultImage : '',
+    width : 32,
+    height : 32,
+    top : 16,
+    left : 16
+},
+"#username": {
+    touchEnabled : false,
+    width : 143,
+    height : 32,
+    top : 16,
+    left : 56,
+    color : Alloy.CFG.ui_color,
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14,
+        fontWeight : 'bold'
+    }
+},
+"#location": {
+	backgroundColor : '#ffffff',
+    width : 208,
+    height : 0,
+    top : 0,
+    left : 0
+},
+"#location_icon": {
+	defaultImage : '',
+	image : 'zoom/location_icon.png',
+    width : 56,
+    height : 64,
+    top : 0,
+    left : 0
+},
+"#location_name": {
+    width : 140,
+    height : 42,
+    top : 8,
+    left : 60,
+    color : Alloy.CFG.ui_color,
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 18,
+        fontWeight : 'bold'
+    }
+},
+"#tags": {
+	backgroundColor : '#ffffff',
+    width : 208,
+    height : 0,
+    top : 0,
+    left : 0
+},
+"#tags_icon": {
+	defaultImage : '',
+	image : 'zoom/tags_icon.png',
+    width : 56,
+    height : 64,
+    top : 0,
+    left : 0
+},
+"#tags_name": {
+    width : 140,
+    height : 42,
+    top : 8,
+    left : 60,
+    color : '#666666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 18,
+        fontWeight : 'bold'
+    }
+},
+"#likes": {
+    width : 400,
+    height : Ti.UI.SIZE,
+    top : 0,
+    left : 0,
+    layout:'horizontal'
+},
+"#likes_icon": {
+	defaultImage : '',
+	image : 'zoom/likes_icon.png',
+    width : 32,
+    height : 32,
+    bottom : 16,
+    top : 16,
+    left : 16
+},
+"#likes_count": {
+    width : 352,
+    height : 32,
+    bottom : 16,
+    top : 16,
+    left : 0,
+    color : '#989898',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 24
+    }
+},

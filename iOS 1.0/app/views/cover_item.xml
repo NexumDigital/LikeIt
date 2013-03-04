@@ -1,0 +1,8 @@
+<Alloy>
+    <View id="cover_item">
+        <ImageView id="back"/>
+        <View id="placeholder"/>
+        <ImageView id="icon"/>
+        <Label id="label"/>
+    </View>
+</Alloy>

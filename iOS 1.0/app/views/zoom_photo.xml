@@ -1,0 +1,13 @@
+<Alloy>
+	<View id="zoom_photo" onSingletap="openLink">
+		<View id="buttons">
+			<ImageView id="btn_like" />
+			<ImageView id="btn_share" />
+			<ImageView id="shadow" />
+		</View>
+		<ScrollView id="scroll">
+			<ImageView id="photo" onDoubletap="likePhoto" />
+			<ImageView id="photo_overlay" />
+		</ScrollView>
+	</View>
+</Alloy>

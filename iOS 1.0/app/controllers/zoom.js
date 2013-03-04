@@ -1,84 +1,81 @@
 function closeZoom() {
-	Alloy.Globals.index.closeOverlay();
+	Alloy.Globals.index.fireEvent('closeOverlay');
 }
 
 function slideContent(e) {
-	if (!sliding) {
-		sliding = true;
-		prev_index = index;
+	if (!$.zoom.sliding && ('left' === e.direction || 'right' === e.direction)) {
+		$.zoom.sliding = true;
+		$.zoom.prev_index = $.zoom.index;
 
 		switch(e.direction) {
 			case 'left':
-				left_out = -640;
-				left_in = Alloy.Globals.width + 640;
-				index++;
+				$.zoom.left_out = -640;
+				$.zoom.left_in = Alloy.Globals.width + 640;
+				$.zoom.index++;
 				break;
 			case 'right':
-				left_out = Alloy.Globals.width + 640;
-				left_in = -640;
-				index--;
+				$.zoom.left_out = Alloy.Globals.width + 640;
+				$.zoom.left_in = -640;
+				$.zoom.index--;
 				break;
 		}
 
-		if (prev_index !== index && undefined !== photos[index]) {
-			containers[index] = Alloy.createController('zoom_content').getView();
-			containers[index].updatePhoto(photos[index]);
-			containers[index].left = left_in;
-			$.zoom.add(containers[index]);
+		if ($.zoom.prev_index !== $.zoom.index && undefined !== Alloy.Globals.data.photos[$.zoom.index]) {
+			$.zoom.fireEvent('openPhoto', {
+				index : $.zoom.index
+			});
 
-			slide_in.left = ((Alloy.Globals.width - 640) / 2);
-			containers[index].animate(slide_in);
-
-			slide_out.left = left_out;
-			containers[prev_index].animate(slide_out);
-
-			if (undefined !== photos[index - 1])
-				$.holder_left.image = photos[index -1]['urls']['612'];
-
-			if (undefined !== photos[index + 1])
-				$.holder_right.image = photos[index +1]['urls']['612'];
 		} else {
-			index = prev_index;
-			sliding = false;
+			$.zoom.index = $.zoom.prev_index;
+			Alloy.Globals.animation.shake(Alloy.Globals.data.containers[$.zoom.index]);
+			$.zoom.sliding = false;
 		}
 	}
 }
 
-var index = 0;
-var photos = [];
-var containers = [];
-var slide_out = Ti.UI.createAnimation();
-var slide_in = Ti.UI.createAnimation();
-var sliding = false;
-var prev_index = 0;
-var left_out = 0;
-var left_in = 0;
+$.zoom.slide_out = Ti.UI.createAnimation();
+$.zoom.slide_in = Ti.UI.createAnimation();
+$.zoom.sliding = false;
+$.zoom.prev_index = 0;
 
-$.zoom.openPhoto = function(index_p, photos_p) {
-	index = index_p;
-	photos = photos_p;
+$.zoom.addEventListener('openPhoto', function(e) {
+	Ti.API.info('zoom: ' + e.index);
 
-	containers[index] = Alloy.createController('zoom_content').getView();
-	containers[index].updatePhoto(photos[index]);
-	$.zoom.add(containers[index]);
+	$.zoom.index = e.index;
+	if (undefined === $.zoom.left_in)
+		$.zoom.left_in = ((Alloy.Globals.width - 640) / 2);
 
-	if (undefined !== photos[index - 1])
-		$.holder_left.image = photos[index -1]['urls']['612'];
+	Alloy.Globals.data.containers[$.zoom.index] = Alloy.createController('zoom_photo').getView();
+	Alloy.Globals.data.containers[$.zoom.index].left = $.zoom.left_in;
+	$.zoom.add(Alloy.Globals.data.containers[$.zoom.index]);
 
-	if (undefined !== photos[index + 1])
-		$.holder_right.image = photos[index +1]['urls']['612'];
-}
-
-slide_out.addEventListener('complete', function() {
-	Alloy.Globals.index.ui_grid.fireEvent('scrollToPhoto', {
-		photo_index : index
+	Alloy.Globals.data.containers[$.zoom.index].fireEvent('updatePhoto', {
+		index : $.zoom.index
 	});
 
-	$.zoom.remove(containers[prev_index]);
-	containers[prev_index] = null;
-	sliding = false;
+	if (undefined !== Alloy.Globals.data.photos[$.zoom.index - 1])
+		$.holder_left.image = Alloy.Globals.data.photos[$.zoom.index -1]['urls']['612'];
+
+	if (undefined !== Alloy.Globals.data.photos[$.zoom.index + 1])
+		$.holder_right.image = Alloy.Globals.data.photos[$.zoom.index +1]['urls']['612'];
+
+	$.zoom.slide_in.left = ((Alloy.Globals.width - 640) / 2);
+	Alloy.Globals.data.containers[$.zoom.index].animate($.zoom.slide_in);
+
+	if (undefined !== $.zoom.left_out) {
+		$.zoom.slide_out.left = $.zoom.left_out;
+		Alloy.Globals.data.containers[$.zoom.prev_index].animate($.zoom.slide_out);
+	}
 });
 
-Ti.Gesture.addEventListener('orientationchange', function(e) {
-	containers[index].left = ((Alloy.Globals.width - 640) / 2);
+$.zoom.slide_out.addEventListener('complete', function() {
+	Alloy.Globals.index.fireEvent('contentAction', {
+		kind : 'grid',
+		action : 'gridScrollTo',
+		param_index : $.zoom.index
+	});
+
+	$.zoom.remove(Alloy.Globals.data.containers[$.zoom.prev_index]);
+	Alloy.Globals.data.containers[$.zoom.prev_index] = null;
+	$.zoom.sliding = false;
 });
