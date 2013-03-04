@@ -1,5 +1,0 @@
-<Alloy>
-    <ScrollView id="grid" onClick="openZoom">
-        <View class="spacer"/>
-    </ScrollView>
-</Alloy>
