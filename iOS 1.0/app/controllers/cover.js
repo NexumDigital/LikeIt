@@ -1,75 +1,23 @@
 var frames = [];
 
-$.cover.frame = {
-	backgroundImage : 'cover/frame_back.png',
-	left : 0,
-	top : 0,
-	width : 256,
-	height : 256
-};
-
-$.cover.back = {
-	touchEnabled : false,
-	image : 'cover/image_0.png',
-	left : 4,
-	top : 4,
-	width : 248,
-	height : 248
-};
-
-$.cover.placeholder = {
-	touchEnabled : false,
-	backgroundColor : '#ffffff',
-	opacity : 0.8,
-	width : 248,
-	height : 44,
-	bottom : 4,
-	left : 4
-};
-
-$.cover.icon = {
-	touchEnabled : false,
-	image : 'cover/icon_default.png',
-	width : 36,
-	height : 44,
-	bottom : 4,
-	left : 4
-};
-
-$.cover.label = {
-	touchEnabled : false,
-	width : 176,
-	height : 44,
-	bottom : 4,
-	left : 40,
-	color : Alloy.CFG.ui_color,
-	font : {
-		fontFamily : Alloy.CFG.ui_font,
-		fontSize : 14,
-		fontWeight : 'bold'
-	}
-};
-
-function deleteSelection(e) {
-	if (undefined !== e.source.id_stream && 'default' !== e.source.id_stream) {
-		Alloy.Globals.http.del('streams', e.source.id_stream);
-		$.content.remove(e.source);
-	}
-}
-
 function openSelection(e) {
-	switch(e.source.action) {
-		case 'feed':
-		case 'liked':
-		case 'location':
-		case 'tag':
-		case 'user':
+	switch(e.source.origin) {
+		case 'albums':
+			Alloy.Globals.index.fireEvent('contentAction', {
+				kind : 'grid',
+				action : 'gridOpenAlbum',
+				param_icon : 'album',
+				param_title : e.source.title,
+				param_id_album : e.source.id_album
+			});
+			break;
+		case 'streams':
 			Alloy.Globals.index.fireEvent('contentAction', {
 				kind : 'grid',
 				action : 'gridOpenStream',
 				param_icon : e.source.icon,
 				param_title : e.source.title,
-				param_stream : e.source.action,
+				param_stream : e.source.stream,
 				param_identifier : e.source.identifier
 			});
 			break;
@@ -86,33 +34,31 @@ $.cover.addEventListener('setCover', function(e) {
 
 	switch(e.cover) {
 		case 'streams':
+			for (var id in Alloy.Globals.ui.streams) {
+				frames[$.cover.index] = Alloy.createController('cover_item').getView();
+				frames[$.cover.index].fireEvent('updateStream', {
+					id_stream : Alloy.Globals.ui.streams[id]['id_stream'],
+					stream : Alloy.Globals.ui.streams[id]['stream'],
+					identifier : Alloy.Globals.ui.streams[id]['identifier'],
+					thumbnail : Alloy.Globals.ui.streams[id]['thumbnail'],
+					icon : Alloy.Globals.ui.streams[id]['stream'],
+					title : Alloy.Globals.ui.streams[id]['title']
+				});
+				$.content.add(frames[$.cover.index++]);
+			}
 			Alloy.Globals.http.get('streams', {});
 			break;
 		case 'albums':
-			frames[$.cover.index] = Alloy.createController('cover_item').getView();
-			frames[$.cover.index].fireEvent('updateItem', {
-				action : 'liked',
-				image : 'cover/image_2.png',
-				icon : 'instagram',
-				label : 'LIKED'
-			});
-			$.content.add(frames[$.cover.index++]);
+			for (var id in Alloy.Globals.ui.albums) {
+				frames[$.cover.index] = Alloy.createController('cover_item').getView();
+				frames[$.cover.index].fireEvent('updateAlbum', {
+					id_album : Alloy.Globals.ui.albums[id]['id_album'],
+					title : Alloy.Globals.ui.albums[id]['title'],
+					thumbnail : Alloy.Globals.ui.albums[id]['thumbnail']
+				});
+				$.content.add(frames[$.cover.index++]);
+			}
+			Alloy.Globals.http.get('albums', {});
 			break;
-	}
-});
-
-$.cover.addEventListener('handleResponse', function(e) {
-	Ti.API.info(e.response);
-	for (var id in e.response['streams_data']) {
-		frames[$.cover.index] = Alloy.createController('cover_item').getView();
-		frames[$.cover.index].fireEvent('updateItem', {
-			id_stream : e.response['streams_data'][id]['id_stream'],
-			action : e.response['streams_data'][id]['stream'],
-			image : e.response['streams_data'][id]['thumbnail'],
-			icon : e.response['streams_data'][id]['stream'],
-			label : e.response['streams_data'][id]['label']
-		});
-		frames[$.cover.index].identifier = e.response['streams_data'][id]['identifier'];
-		$.content.add(frames[$.cover.index++]);
 	}
 });

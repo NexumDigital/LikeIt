@@ -5,9 +5,11 @@
 	width : 256,
 	height : 256
 },
-"#back" : {
+"#thumbnail" : {
 	touchEnabled : false,
-	image : 'cover/image_0.png',
+	backgroundColor : '#eeeeee',
+	defaultImage : '',
+	image : '',
 	left : 4,
 	top : 4,
 	width : 248,
@@ -31,7 +33,7 @@
 	bottom : 4,
 	left : 4
 },
-"#label" : {
+"#title" : {
 	touchEnabled : false,
 	width : 176,
 	height : 28,

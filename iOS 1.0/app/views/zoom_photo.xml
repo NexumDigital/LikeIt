@@ -1,7 +1,7 @@
 <Alloy>
 	<View id="zoom_photo" onSingletap="openLink">
 		<View id="buttons">
-			<ImageView id="btn_like" />
+			<ImageView id="btn_albums" />
 			<ImageView id="btn_share" />
 			<ImageView id="shadow" />
 		</View>

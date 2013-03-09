@@ -1,18 +1,12 @@
+$.zoom_photo.menu_albums = null;
+
 function openLink(e) {
 	switch(e.source.action) {
-		case 'post_like':
-			Alloy.Globals.http.post('likes', {
-				id_ig_photo : $.photo.id_ig
-			});
-			$.btn_like.image = 'zoom/btn_like_on.png';
-			$.btn_like.action = 'delete_like';
-			Alloy.Globals.data.photos[$.zoom_photo.index]['liked'] = true;
+		case 'albums':
+			updateAlbumsSelected(!$.btn_albums.selected);
 			break;
-		case 'delete_like':
-			Alloy.Globals.http.del('likes', $.photo.id_ig);
-			$.btn_like.image = 'zoom/btn_like.png';
-			$.btn_like.action = 'post_like';
-			Alloy.Globals.data.photos[$.zoom_photo.index]['liked'] = false;
+		case 'share':
+			updateShareSelected(!$.btn_share.selected);
 			break;
 		case 'user':
 		case 'tag':
@@ -25,7 +19,7 @@ function openLink(e) {
 				param_stream : e.source.action,
 				param_identifier : e.source.identifier
 			});
-			
+
 			Alloy.Globals.index.fireEvent('closeOverlay');
 			break;
 	}
@@ -33,32 +27,66 @@ function openLink(e) {
 
 function likePhoto(e) {
 	$.photo_overlay.opacity = 1;
-
+	
 	Alloy.Globals.http.post('likes', {
-		id_ig_photo : $.photo.id_ig
+		id_ig_media : Alloy.Globals.ui.zoom_id_ig_media
 	});
+
+	Alloy.Globals.data.photos[$.zoom_photo.index]['liked'] = true;
+}
+
+function updateAlbumsSelected(selected_p) {
+	if (selected_p) {
+		$.btn_albums.image = 'zoom/btn_albums_on.png';
+		if (null === $.zoom_photo.menu_albums) {
+			$.zoom_photo.menu_albums = Alloy.createController('zoom_albums').getView();
+			$.zoom_photo.add($.zoom_photo.menu_albums);
+		}
+		$.btn_albums.selected = true;
+	} else {
+		$.btn_albums.image = 'zoom/btn_albums.png';
+		if (null !== $.zoom_photo.menu_albums) {
+			$.zoom_photo.remove($.zoom_photo.menu_albums);
+			$.zoom_photo.menu_albums = null;
+		}
+		$.btn_albums.selected = false;
+	}
+}
+
+
+
+function updateShareSelected(selected_p) {
+	if (selected_p) {
+		$.btn_share.image = 'zoom/btn_share_on.png';
+		$.btn_share.selected = true;
+	} else {
+		$.btn_share.image = 'zoom/btn_share.png';
+		$.btn_share.selected = false;
+	}
 }
 
 $.zoom_photo.addEventListener('updatePhoto', function(e) {
 	$.zoom_photo.index = e.index;
-
-	$.photo.id_ig = Alloy.Globals.data.photos[$.zoom_photo.index]['id'];
-
+	
+	Alloy.Globals.ui.zoom_id_ig_media = Alloy.Globals.data.photos[$.zoom_photo.index]['id_ig_media'];
+	
 	$.photo.backgroundImage = Alloy.Globals.data.photos[$.zoom_photo.index]['urls']['306'];
 	$.photo.image = Alloy.Globals.data.photos[$.zoom_photo.index]['urls']['612'];
 
+	$.btn_albums.action = 'albums';
+	$.btn_share.action = 'share';
+
 	if (Alloy.Globals.data.photos[$.zoom_photo.index]['liked']) {
-		$.btn_like.image = 'zoom/btn_like_on.png';
-		$.btn_like.action = 'delete_like';
+
 	} else {
-		$.btn_like.action = 'post_like';
+
 	}
 
 	//if (Alloy.Globals.width < Alloy.Globals.height) {
-		$.scroll.details = Alloy.createController('zoom_details_a').getView();
-		$.scroll.add($.scroll.details);
-		$.scroll.details.fireEvent('updateDetails', {
-			index : $.zoom_photo.index
-		});
+	$.scroll.details = Alloy.createController('zoom_details_a').getView();
+	$.scroll.add($.scroll.details);
+	$.scroll.details.fireEvent('updateDetails', {
+		index : $.zoom_photo.index
+	});
 	//}
 });

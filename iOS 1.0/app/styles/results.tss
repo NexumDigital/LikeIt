@@ -40,21 +40,20 @@
     right : 0
 },
 "#results": {
+    backgroundColor : '#ffffff',
     width : Ti.UI.FILL,
     height : Ti.UI.FILL,
     layout:'horizontal',
     zIndex : 10
 },
 "#tags": {
-	top : 44,
-    backgroundColor : '#ffffff'
+	top : 44
 },
 "#tags_icon": {
     image : 'results/tags_icon.png',
 },
 "#people": {
-	top : 44,
-    backgroundColor : '#ffffff'
+	top : 44
 },
 "#people_icon": {
     image : 'results/people_icon.png',

@@ -26,6 +26,7 @@
 			</View>
 			<View id="border_top"/>
 			<View id="border_center" />
+			<ImageView id="footer" />
 		</View>
 	</View>
 </Alloy>

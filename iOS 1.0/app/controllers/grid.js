@@ -9,12 +9,12 @@ $.grid.style_frame = {
 	image : '',
 	backgroundColor : 'transparent',
 	defaultImage : '',
-	left : 4,
-	top : 4,
-	right : 4,
-	bottom : 4,
-	width : 248,
-	height : 248
+	left : 1,
+	top : 1,
+	right : 1,
+	bottom : 1,
+	width : 254,
+	height : 254
 };
 
 for (var i; i < 250; i++) {
@@ -56,9 +56,15 @@ $.grid.addEventListener('clearFrame', function(e) {
 $.grid.addEventListener('handleResponse', function(e) {
 	$.grid.more = false;
 
-	if (e.response['stream'] === $.grid.stream) {
+	if ('streams' === $.grid.origin && e.response['stream'] === $.grid.stream && e.response['identifier'] === $.grid.identifier) {
 		for (var id in e.response['photos_data']) {
 			Alloy.Globals.data.photos[$.grid.index] = e.response['photos_data'][id];
+
+			if ('feed' === $.grid.stream) {
+				Alloy.Globals.ui.relationships[Alloy.Globals.data.photos[$.grid.index]['author']['id']] = {};
+				Alloy.Globals.ui.relationships[Alloy.Globals.data.photos[$.grid.index]['author']['id']]['id_ig_other_user'] = Alloy.Globals.data.photos[$.grid.index]['author']['id'];
+				Alloy.Globals.ui.relationships[Alloy.Globals.data.photos[$.grid.index]['author']['id']]['outgoing'] = 'follows';
+			}
 
 			if (undefined === Alloy.Globals.data.frames[$.grid.index]) {
 				$.grid.fireEvent('newFrame', {
@@ -71,13 +77,27 @@ $.grid.addEventListener('handleResponse', function(e) {
 		}
 
 		$.grid.max_id = e.response['next_max_id'];
-		$.grid.fireEvent('updateVisible');
+	} else if (e.response['id_album'] === $.grid.id_album) {
+		for (var id in e.response['photos_data']) {
+			Alloy.Globals.data.photos[$.grid.index] = e.response['photos_data'][id];
+
+			if (undefined === Alloy.Globals.data.frames[$.grid.index]) {
+				$.grid.fireEvent('newFrame', {
+					index : $.grid.index
+				});
+			}
+
+			$.grid.index++;
+		}
 	}
 
+	$.grid.fireEvent('updateVisible');
 	$.grid.loading = false;
 });
 
-$.grid.addEventListener('setStream', function(e) {
+$.grid.addEventListener('setOrigin', function(e) {
+	$.grid.origin = e.origin;
+	$.grid.id_album = e.id_album;
 	$.grid.stream = e.stream;
 	$.grid.identifier = e.identifier;
 
@@ -89,9 +109,6 @@ $.grid.addEventListener('setStream', function(e) {
 	$.grid.going_down = true;
 	$.grid.index_visible_top = 0;
 	$.grid.index_visible_top_prev = 0;
-
-	$.grid.max_id = null;
-	$.grid.more = false;
 
 	$.grid.setContentOffset({
 		y : 0
@@ -105,12 +122,24 @@ $.grid.addEventListener('setStream', function(e) {
 		});
 	}
 
-	Ti.API.info($.grid.stream);
-	$.grid.loading = true;
-	Alloy.Globals.http.get('streams/instagram', {
-		stream : $.grid.stream,
-		identifier : $.grid.identifier
-	});
+	switch($.grid.origin) {
+		case 'albums':
+			$.grid.loading = true;
+			Alloy.Globals.http.get('albums', {
+				id_album : $.grid.id_album
+			});
+			break;
+		case 'streams':
+			$.grid.max_id = null;
+			$.grid.more = false;
+
+			$.grid.loading = true;
+			Alloy.Globals.http.get('streams/instagram', {
+				stream : $.grid.stream,
+				identifier : $.grid.identifier
+			});
+			break;
+	}
 });
 
 $.grid.addEventListener('scrollEnd', function(e) {
@@ -163,7 +192,7 @@ $.grid.addEventListener('updateVisible', function(e) {
 				break;
 		}
 
-		if (undefined === Alloy.Globals.data.photos[$.grid.index_visible_top + 72]) {
+		if ('streams' === $.grid.origin && undefined === Alloy.Globals.data.photos[$.grid.index_visible_top + 84]) {
 			if ($.grid.more && !$.grid.loading) {
 				$.grid.loading = true;
 				Alloy.Globals.http.get('streams/instagram', {

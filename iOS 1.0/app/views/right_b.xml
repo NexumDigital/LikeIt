@@ -1,0 +1,11 @@
+<Alloy>
+	<View id="right_a">
+		<ImageView id="top" />
+		<View class="primary" onSingletap="followTap">
+			<Label id="follow" class="primary_label"/>
+		</View>
+		<View class="primary" onSingletap="subscribeTap">
+			<Label id="subscribe" class="primary_label"/>
+		</View>
+	</View>
+</Alloy>

@@ -1,13 +1,12 @@
 "#left": {
     width : 328,
-    height : Ti.UI.FILL,
+    height : Ti.UI.SIZE,
     top : 0,
     left : -328,
     zIndex : 25
 },
 "#back": {
     backgroundColor : '#fff',
-    opacity : 0.95,
     width : 320,
     height : Ti.UI.FILL,
     top : 0,

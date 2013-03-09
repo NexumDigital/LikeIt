@@ -1,0 +1,11 @@
+<Alloy>
+	<View id="zoom_albums">
+		<ImageView id="top" />
+		<View class="input">
+			<TextField id="create_field" onFocus="showCreateButton" onBlur="hideCreateButton" />
+            <View id="btn_create" onSingletap="createTap"/>
+		</View>
+		<View id="list" onSingletap="listClick" />
+		<ImageView id="bottom" />
+	</View>
+</Alloy>

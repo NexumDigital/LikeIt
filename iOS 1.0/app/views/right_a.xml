@@ -1,0 +1,9 @@
+<Alloy>
+	<View id="right_a">
+		<ImageView id="top" />
+		<View class="primary" onSingletap="subscribeTap">
+			<Label id="subscribe" class="primary_label"/>
+		</View>
+		<ImageView id="bottom" />
+	</View>
+</Alloy>

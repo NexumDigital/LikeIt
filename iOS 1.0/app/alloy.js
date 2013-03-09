@@ -15,13 +15,30 @@ Alloy.Globals.http = require('http');
 Alloy.Globals.height = Ti.Platform.displayCaps.platformHeight - 20;
 Alloy.Globals.width = Ti.Platform.displayCaps.platformWidth;
 
+Alloy.Globals.stream = [];
+Alloy.Globals.stream['title'] = null;
+Alloy.Globals.stream['stream'] = null;
+Alloy.Globals.stream['identifier'] = null;
+
 Alloy.Globals.data = [];
+// GRID
 Alloy.Globals.data.photos = [];
 Alloy.Globals.data.frames = [];
 Alloy.Globals.data.visible = [];
+// ZOOM
 Alloy.Globals.data.containers = [];
+// DETAILS
 Alloy.Globals.data.tags = [];
 Alloy.Globals.data.likes = [];
+
+// UI STATE
+Alloy.Globals.ui = [];
+Alloy.Globals.ui.zoom_id_ig_media = null;
+Alloy.Globals.ui.streams = [];
+Alloy.Globals.ui.albums = [];
+Alloy.Globals.ui.relationships = [];
+
+
 
 Alloy.Globals.animation = require('alloy/animation');
 

@@ -1,9 +1,9 @@
 $.instagram.addEventListener('load', function(e){
     if(undefined !== e.source.url){
-        var code = e.source.url.replace(Alloy.CFG.ig_callback + '?code=', '');
-        var error = e.source.url.replace(Alloy.CFG.ig_callback + '?error_reason=', '');
-        if(code != e.source.url) {
-            
+    	var url = e.source.url.replace('#_', '');
+        var code = url.replace(Alloy.CFG.ig_callback + '?code=', '');
+        var error = url.replace(Alloy.CFG.ig_callback + '?error_reason=', '');
+        if(code != url) {
             Alloy.Globals.http.post('sessions', {
                 id_install : Ti.Platform.id,
                 client : Ti.App.id,

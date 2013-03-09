@@ -17,8 +17,8 @@
     touchEnabled : false,
     width : 608,
     height : Ti.UI.SIZE,
-    bottom : 16,
-    top : 16,
+    bottom : 12,
+    top : 12,
     left : 16,
     color : '#747474',
     font : {
@@ -27,17 +27,17 @@
     }
 },
 "#details": {
-    width : 608,
+    width : 640,
     height : Ti.UI.SIZE,
     top : 16,
-    left : 16
+    left : 0
 },
 "#border_top": {
 	touchEnabled : false,
     width : 608,
     height : 1,
     top : 0,
-    left : 0,
+    left : 16,
     backgroundColor : '#ebebeb'
 },
 "#border_center": {
@@ -45,7 +45,7 @@
     width : 1,
     height : Ti.UI.FILL,
     top : 1,
-    left : 208,
+    left : 224,
     backgroundColor : '#ebebeb'
 },
 "#column_left": {
@@ -53,14 +53,16 @@
     width : 208,
     height : Ti.UI.SIZE,
     top : 0,
-    left : 0,
+    bottom : 4,
+    left : 16,
     layout:'horizontal'
 },
 "#column_right": {
     width : 400,
     height : Ti.UI.SIZE,
     top : 0,
-    left : 208,
+    bottom : 4,
+    left : 224,
     layout:'horizontal'
 },
 "#author": {
@@ -172,4 +174,11 @@
         fontFamily : Alloy.CFG.ui_font,
         fontSize : 24
     }
+},
+"#footer": {
+	image : 'zoom/footer.png',
+    width : 640,
+    height : 4,
+    bottom : 0,
+    left : 0
 },

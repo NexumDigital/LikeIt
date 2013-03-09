@@ -1,0 +1,60 @@
+"#zoom_albums": {
+    width : 260,
+    height : Ti.UI.SIZE,
+    top : 46,
+    left : 28,
+    layout : 'horizontal',
+    zIndex : 3
+},
+"#top": {
+	image : 'popup/top.png',
+    width : 260,
+    height : 20,
+    top : 0,
+    left : 0
+},
+".input": {
+	backgroundImage : 'popup/input.png',
+    width : 260,
+    height : 65,
+    top : 0,
+    left : 0
+},
+"#create_field": {
+    autocapitalization : Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    hintText : 'new album',
+    backgroundColor : 'transparent',
+    width : 145,
+    height : 64,
+    top : 0,
+    left : 23,
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14
+    },
+    returnKeyType : Ti.UI.RETURNKEY_DONE,
+    value : ''
+},
+"#btn_create": {
+	opacity : 0,
+	backgroundImage : 'popup/btn_create.png',
+    width : 91,
+    height : 65,
+    top : 0,
+    right : 0
+},
+"#list": {
+	backgroundColor : 'transparent',
+    width : 260,
+    height : Ti.UI.SIZE,
+    top : 0,
+    left : 0,
+    layout : 'horizontal'
+},
+"#bottom": {
+	image : 'popup/bottom.png',
+    width : 260,
+    height : 7,
+    top : 0,
+    left : 0
+},

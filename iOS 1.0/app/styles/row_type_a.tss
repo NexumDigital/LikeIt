@@ -11,7 +11,7 @@
     height : 64,
     top : 0,
     left : 32,
-    color : '#666',
+    color : '#666666',
     font : {
         fontFamily : Alloy.CFG.ui_font,
         fontSize : 14,

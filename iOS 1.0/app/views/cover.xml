@@ -1,5 +1,5 @@
 <Alloy>
-    <ScrollView id="cover" onSingletap="openSelection" onLongpress="deleteSelection">
+    <ScrollView id="cover" onSingletap="openSelection">
         <View id="content"/>
     </ScrollView>
 </Alloy>

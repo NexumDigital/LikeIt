@@ -10,11 +10,7 @@ $.index.ui_content = null;
 
 $.index.ui_overlay = null;
 
-$.index.addEventListener('closeLeft', function() {
-	var animation = Ti.UI.createAnimation();
-	animation.left = -$.index.ui_left.width;
-	$.index.ui_left.animate(animation);
-});
+$.index.ui_right = null;
 
 $.index.addEventListener('openLeft', function() {
 	var animation = Ti.UI.createAnimation();
@@ -22,36 +18,51 @@ $.index.addEventListener('openLeft', function() {
 	$.index.ui_left.animate(animation);
 });
 
-$.index.addEventListener('openRight', function() {
-	if (null !== $.index.ui_content && 'grid' === $.index.ui_content.kind) {
-		if (null !== $.index.ui_content.identifier) {
-			Alloy.Globals.http.post('streams', {
-				stream : $.index.ui_content.stream,
-				identifier : $.index.ui_content.identifier,
-				label : $.index.ui_header.getTitle()
-			});
+$.index.addEventListener('closeLeft', function() {
+	var animation = Ti.UI.createAnimation();
+	animation.left = -$.index.ui_left.width;
+	$.index.ui_left.animate(animation);
+});
+
+$.index.addEventListener('openRight', function(e) {
+	if (null === $.index.ui_right) {
+		switch(e.options) {
+			case 'a':
+				$.index.ui_right = Alloy.createController('right_a').getView();
+				$.index.add($.index.ui_right);
+				$.index.ui_header.updateRightSelected(true);
+				break;
+			case 'b':
+				$.index.ui_right = Alloy.createController('right_b').getView();
+				$.index.add($.index.ui_right);
+				$.index.ui_header.updateRightSelected(true);
+				break;
 		}
+	} else {
+		$.index.closeRight();
 	}
 });
+
+$.index.closeRight = function() {
+	if (null !== $.index.ui_right) {
+		$.index.remove($.index.ui_right);
+		$.index.ui_right = null;
+		$.index.ui_header.updateRightSelected(false);
+	}
+}
 
 $.index.addEventListener('updateHeader', function(e) {
 	if (undefined !== e.icon)
 		$.index.ui_header.updateIcon(e.icon);
 	if (undefined !== e.title)
 		$.index.ui_header.updateTitle(e.title);
-	
-	$.index.ui_header.updateRight(e.icon);
-});
 
-$.index.addEventListener('closeOverlay', function() {
-	if (null !== $.index.ui_overlay) {
-		$.index.remove($.index.ui_overlay);
-		$.index.ui_overlay = null;
-	}
+	$.index.closeRight();
+	$.index.ui_header.updateRight(e.options);
 });
 
 $.index.addEventListener('contentAction', function(e) {
-	if ('gridOpenStream' === e.action || 'coverOpen' === e.action) {
+	if ('gridOpenAlbum' === e.action || 'gridOpenStream' === e.action || 'coverOpen' === e.action) {
 		if (null === $.index.ui_content) {
 			$.index.openContent(e.kind);
 		} else if (e.kind !== $.index.ui_content.kind) {
@@ -62,13 +73,50 @@ $.index.addEventListener('contentAction', function(e) {
 
 	if (null !== $.index.ui_content && e.kind === $.index.ui_content.kind) {
 		switch(e.action) {
-			case 'gridOpenStream':
+			case 'gridOpenAlbum':
 				$.index.fireEvent('updateHeader', {
 					icon : e.param_icon,
-					title : e.param_title
+					title : e.param_title,
+					options : null
 				});
 
-				$.index.ui_content.fireEvent('setStream', {
+				$.index.ui_content.fireEvent('setOrigin', {
+					origin : 'albums',
+					id_album : e.param_id_album
+				});
+				break;
+			case 'gridOpenStream':
+				Alloy.Globals.stream['title'] = e.param_title;
+				Alloy.Globals.stream['stream'] = e.param_stream;
+				Alloy.Globals.stream['identifier'] = e.param_identifier;
+
+				switch(e.param_stream) {
+					case 'tag':
+					case 'location':
+						e.param_options = 'a';
+						break;
+					case 'user':
+						e.param_options = 'b';
+						if (undefined === Alloy.Globals.ui.relationships[Alloy.Globals.stream['identifier']]) {
+							Alloy.Globals.http.get('relationships', {
+								id_ig_other_user : e.param_identifier
+							});
+						}
+						break;
+					default:
+						e.param_options = null;
+						break;
+				}
+
+				$.index.fireEvent('updateHeader', {
+					icon : e.param_icon,
+					title : e.param_title,
+					options : e.param_options
+				});
+
+				$.index.ui_content.fireEvent('setOrigin', {
+					origin : 'streams',
+					title : e.param_title,
 					stream : e.param_stream,
 					identifier : e.param_identifier
 				});
@@ -86,16 +134,12 @@ $.index.addEventListener('contentAction', function(e) {
 			case 'coverOpen':
 				$.index.fireEvent('updateHeader', {
 					icon : e.param_icon,
-					title : e.param_title
+					title : e.param_title,
+					options : null
 				});
 
 				$.index.ui_content.fireEvent('setCover', {
 					cover : e.param_cover
-				});
-				break;
-			case 'coverHandleResponse':
-				$.index.ui_content.fireEvent('handleResponse', {
-					response : e.param_response
 				});
 				break;
 		}
@@ -151,10 +195,18 @@ $.index.addEventListener('overlayAction', function(e) {
 			case 'resultsOpen':
 				$.index.fireEvent('updateHeader', {
 					icon : 'results',
-					title : 'results'
+					title : 'results',
+					options : null
 				});
 				break;
 		}
+	}
+});
+
+$.index.addEventListener('closeOverlay', function() {
+	if (null !== $.index.ui_overlay) {
+		$.index.remove($.index.ui_overlay);
+		$.index.ui_overlay = null;
 	}
 });
 
@@ -182,12 +234,6 @@ $.index.openOverlay = function(kind_p) {
 		}
 	}
 }
-if (!Alloy.CFG.logged) {
-	$.index.view_start = Alloy.createController('start').getView();
-	$.index.add($.index.view_start);
-}
-
-$.index.open();
 
 Ti.Gesture.addEventListener('orientationchange', function(e) {
 	if (null !== $.index.ui_content) {
@@ -213,3 +259,10 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 		}
 	}
 });
+
+if (!Alloy.CFG.logged) {
+	$.index.view_start = Alloy.createController('start').getView();
+	$.index.add($.index.view_start);
+}
+
+$.index.open();
