@@ -22,7 +22,7 @@ Alloy.Globals.stream['identifier'] = null;
 
 Alloy.Globals.data = [];
 // GRID
-Alloy.Globals.data.photos = [];
+Alloy.Globals.data.media = [];
 Alloy.Globals.data.frames = [];
 Alloy.Globals.data.visible = [];
 // ZOOM
@@ -30,10 +30,11 @@ Alloy.Globals.data.containers = [];
 // DETAILS
 Alloy.Globals.data.tags = [];
 Alloy.Globals.data.likes = [];
+Alloy.Globals.data.albums = [];
 
 // UI STATE
 Alloy.Globals.ui = [];
-Alloy.Globals.ui.zoom_id_ig_media = null;
+Alloy.Globals.ui.zoom_index = null;
 Alloy.Globals.ui.streams = [];
 Alloy.Globals.ui.albums = [];
 Alloy.Globals.ui.relationships = [];

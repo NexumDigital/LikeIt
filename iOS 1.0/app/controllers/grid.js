@@ -1,9 +1,7 @@
-Alloy.Globals.data.photos = [];
+Alloy.Globals.data.media = [];
 Alloy.Globals.data.frames = [];
 Alloy.Globals.data.visible = [];
 Alloy.Globals.data.containers = [];
-Alloy.Globals.data.tags = [];
-Alloy.Globals.data.likes = [];
 
 $.grid.style_frame = {
 	image : '',
@@ -24,7 +22,7 @@ for (var i; i < 250; i++) {
 }
 
 function openZoom(e) {
-	if (Alloy.Globals.data.photos[e.source.index]) {
+	if (Alloy.Globals.data.media[e.source.index]) {
 		Alloy.Globals.index.fireEvent('overlayAction', {
 			kind : 'zoom',
 			action : 'zoomOpenPhoto',
@@ -39,9 +37,9 @@ $.grid.addEventListener('newFrame', function(e) {
 });
 
 $.grid.addEventListener('setFrame', function(e) {
-	if (e.index !== Alloy.Globals.data.visible[e.index] && undefined !== Alloy.Globals.data.photos[e.index] && undefined !== Alloy.Globals.data.frames[e.index]) {
+	if (e.index !== Alloy.Globals.data.visible[e.index] && undefined !== Alloy.Globals.data.media[e.index] && undefined !== Alloy.Globals.data.frames[e.index]) {
 		Alloy.Globals.data.frames[e.index].backgroundColor = '#eeeeee';
-		Alloy.Globals.data.frames[e.index].image = Alloy.Globals.data.photos[e.index]['urls']['306'];
+		Alloy.Globals.data.frames[e.index].image = Alloy.Globals.data.media[e.index]['urls']['306'];
 		Alloy.Globals.data.frames[e.index].index = e.index;
 		Alloy.Globals.data.visible[e.index] = e.index;
 	}
@@ -57,13 +55,13 @@ $.grid.addEventListener('handleResponse', function(e) {
 	$.grid.more = false;
 
 	if ('streams' === $.grid.origin && e.response['stream'] === $.grid.stream && e.response['identifier'] === $.grid.identifier) {
-		for (var id in e.response['photos_data']) {
-			Alloy.Globals.data.photos[$.grid.index] = e.response['photos_data'][id];
+		for (var id in e.response['media_data']) {
+			Alloy.Globals.data.media[$.grid.index] = e.response['media_data'][id];
 
 			if ('feed' === $.grid.stream) {
-				Alloy.Globals.ui.relationships[Alloy.Globals.data.photos[$.grid.index]['author']['id']] = {};
-				Alloy.Globals.ui.relationships[Alloy.Globals.data.photos[$.grid.index]['author']['id']]['id_ig_other_user'] = Alloy.Globals.data.photos[$.grid.index]['author']['id'];
-				Alloy.Globals.ui.relationships[Alloy.Globals.data.photos[$.grid.index]['author']['id']]['outgoing'] = 'follows';
+				Alloy.Globals.ui.relationships[Alloy.Globals.data.media[$.grid.index]['author']['id']] = {};
+				Alloy.Globals.ui.relationships[Alloy.Globals.data.media[$.grid.index]['author']['id']]['id_ig_other_user'] = Alloy.Globals.data.media[$.grid.index]['author']['id'];
+				Alloy.Globals.ui.relationships[Alloy.Globals.data.media[$.grid.index]['author']['id']]['outgoing'] = 'follows';
 			}
 
 			if (undefined === Alloy.Globals.data.frames[$.grid.index]) {
@@ -78,8 +76,8 @@ $.grid.addEventListener('handleResponse', function(e) {
 
 		$.grid.max_id = e.response['next_max_id'];
 	} else if (e.response['id_album'] === $.grid.id_album) {
-		for (var id in e.response['photos_data']) {
-			Alloy.Globals.data.photos[$.grid.index] = e.response['photos_data'][id];
+		for (var id in e.response['media_data']) {
+			Alloy.Globals.data.media[$.grid.index] = e.response['media_data'][id];
 
 			if (undefined === Alloy.Globals.data.frames[$.grid.index]) {
 				$.grid.fireEvent('newFrame', {
@@ -101,7 +99,7 @@ $.grid.addEventListener('setOrigin', function(e) {
 	$.grid.stream = e.stream;
 	$.grid.identifier = e.identifier;
 
-	Alloy.Globals.data.photos = [];
+	Alloy.Globals.data.media = [];
 
 	$.grid.index = 0;
 	$.grid.scrolling = false;
@@ -192,7 +190,7 @@ $.grid.addEventListener('updateVisible', function(e) {
 				break;
 		}
 
-		if ('streams' === $.grid.origin && undefined === Alloy.Globals.data.photos[$.grid.index_visible_top + 84]) {
+		if ('streams' === $.grid.origin && undefined === Alloy.Globals.data.media[$.grid.index_visible_top + 84]) {
 			if ($.grid.more && !$.grid.loading) {
 				$.grid.loading = true;
 				Alloy.Globals.http.get('streams/instagram', {
@@ -208,7 +206,7 @@ $.grid.addEventListener('updateVisible', function(e) {
 });
 
 $.grid.addEventListener('scrollToPhoto', function(e) {
-	$.grid.offset_y = ((Math.ceil((e.photo_index + 1) / ($.grid.contentWidth / 256)) * 256) - 512);
+	$.grid.offset_y = ((Math.ceil((e.media_index + 1) / ($.grid.contentWidth / 256)) * 256) - 512);
 
 	if ($.grid.offset_y > 0) {
 		$.grid.setContentOffset({

@@ -1,13 +1,13 @@
 <Alloy>
-	<View id="zoom_photo" onSingletap="openLink">
+	<View id="zoom_media" onSingletap="openLink">
 		<View id="buttons">
 			<ImageView id="btn_albums" />
 			<ImageView id="btn_share" />
 			<ImageView id="shadow" />
 		</View>
 		<ScrollView id="scroll">
-			<ImageView id="photo" onDoubletap="likePhoto" />
-			<ImageView id="photo_overlay" />
+			<ImageView id="media" onDoubletap="likePhoto" />
+			<ImageView id="media_overlay" />
 		</ScrollView>
 	</View>
 </Alloy>

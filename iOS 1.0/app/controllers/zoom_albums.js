@@ -41,6 +41,9 @@ for (var index in Alloy.Globals.ui.albums) {
 	albums_data[index].label = Ti.UI.createLabel($.zoom_albums.label);
 	albums_data[index].label.text = Alloy.Globals.ui.albums[index]['title'];
 	albums_data[index].check = Ti.UI.createImageView($.zoom_albums.check);
+	if(undefined !== Alloy.Globals.data.albums[Alloy.Globals.ui.albums[index]['id_album']]){
+		albums_data[index].check.opacity = 1;
+	}
 	albums_data[index].add(albums_data[index].label);
 	albums_data[index].add(albums_data[index].check);
 	$.list.add(albums_data[index]);
@@ -65,16 +68,16 @@ function createTap() {
 }
 
 function listClick(e) {
-	Ti.API.info(Alloy.Globals.ui.zoom_id_ig_media);
-
 	if (1 === albums_data[e.source.index].check.opacity) {
 		albums_data[e.source.index].check.opacity = 0
+		
+		Alloy.Globals.http.del('albums/media', e.source.id_album + '/' + Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['id_ig_media']);
 	} else {
 		albums_data[e.source.index].check.opacity = 1;
 		
-		Alloy.Globals.http.post('albums/photo', {
+		Alloy.Globals.http.post('albums/media', {
 			id_album : e.source.id_album,
-			id_ig_media : Alloy.Globals.ui.zoom_id_ig_media
+			id_ig_media : Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['id_ig_media']
 		});
 	}
 

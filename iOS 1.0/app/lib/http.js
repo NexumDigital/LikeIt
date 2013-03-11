@@ -25,7 +25,6 @@ exports.post = function(path_p, params_p) {
 	var http_client = Ti.Network.createHTTPClient();
 
 	http_client.onload = function(e) {
-		Ti.API.info(this.responseText);
 		mod.onload.post(path_p, params_p, JSON.parse(this.responseText));
 	}
 

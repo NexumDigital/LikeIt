@@ -128,7 +128,7 @@ $.index.addEventListener('contentAction', function(e) {
 				break;
 			case 'gridScrollTo':
 				$.index.ui_content.fireEvent('scrollToPhoto', {
-					photo_index : e.param_index
+					media_index : Alloy.Globals.ui.zoom_index
 				});
 				break;
 			case 'coverOpen':
@@ -183,9 +183,8 @@ $.index.addEventListener('overlayAction', function(e) {
 	if (null !== $.index.ui_overlay && e.kind === $.index.ui_overlay.kind) {
 		switch(e.action) {
 			case 'zoomOpenPhoto':
-				$.index.ui_overlay.fireEvent('openPhoto', {
-					index : e.param_index
-				});
+				Alloy.Globals.ui.zoom_index = e.param_index;
+				$.index.ui_overlay.fireEvent('openPhoto');
 				break;
 			case 'resultsHandleResponse':
 				$.index.ui_overlay.fireEvent('handleResults', {
@@ -238,12 +237,12 @@ $.index.openOverlay = function(kind_p) {
 Ti.Gesture.addEventListener('orientationchange', function(e) {
 	if (null !== $.index.ui_content) {
 		if ('grid' === $.index.ui_content.kind) {
-			$.index.ui_content.photo_offset = Math.ceil(($.index.ui_content.contentOffset.y * $.index.ui_content.contentWidth) / Alloy.Globals.width);
+			$.index.ui_content.media_offset = Math.ceil(($.index.ui_content.contentOffset.y * $.index.ui_content.contentWidth) / Alloy.Globals.width);
 			$.index.ui_content.contentWidth = Alloy.Globals.width;
 
 			if ($.index.ui_content.offset_y > 0) {
 				$.index.ui_content.setContentOffset({
-					y : $.index.ui_content.photo_offset
+					y : $.index.ui_content.media_offset
 				});
 			}
 		}
@@ -255,7 +254,7 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 		}
 
 		if ('zoom' === $.index.ui_overlay.kind) {
-			Alloy.Globals.data.containers[$.index.ui_overlay.index].left = ((Alloy.Globals.width - 640) / 2);
+			Alloy.Globals.data.containers[Alloy.Globals.ui.zoom_index].left = ((Alloy.Globals.width - 640) / 2);
 		}
 	}
 });
