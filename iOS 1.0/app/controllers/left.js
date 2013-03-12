@@ -4,6 +4,7 @@ function closeLeft() {
 }
 
 function openSelection(e) {
+	$.search_field.blur();
 	switch(e.source.action) {
 		case 'instagram':
 			if (menu_data[0].open) {
@@ -147,6 +148,27 @@ function doSearch(e) {
 	}
 
 	closeLeft();
+}
+
+function fieldFocus() {
+	$.search_back.image = 'left/search_back_clear.png';
+}
+
+function fieldBlur() {
+	if ('' === $.search_field.value) {
+		$.search_back.image = 'left/search_back.png';
+	}
+}
+
+function searchTap(e) {
+	if ('search_button' === e.source.id){
+		$.search_field.value = '';
+		$.search_back.image = 'left/search_back.png';
+		$.search_field.blur();
+	} else {
+		$.search_field.focus();
+	}
+		
 }
 
 var menu_data = [];

@@ -19,7 +19,9 @@
     left : 0
 },
 "#title": {
-    width : Ti.UI.SIZE,
+    width : Ti.UI.FILL,
+    top : 0,
+    left : 0,
     height : 44,
     layout:'horizontal'
 },
@@ -34,7 +36,7 @@
 },
 "#title_text": {
     touchEnabled : false,
-    width : Ti.UI.SIZE,
+    width : Ti.UI.FILL,
     height : 44,
     top : 0,
     left : 0,
@@ -43,7 +45,8 @@
         fontFamily : Alloy.CFG.ui_font,
         fontSize : 14,
         fontWeight : 'bold'
-    }
+    },
+    textAlign : 'center'
 },
 "#right": {
     image : '',

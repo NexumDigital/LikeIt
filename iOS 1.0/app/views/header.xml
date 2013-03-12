@@ -2,10 +2,10 @@
 	<View id="header">
 		<View id="back" />
 		<ImageView id="shadow" />
-		<ImageView id="left" onSingletap="openLeft" />
 		<View id="title">
 			<Label id="title_text" />
 		</View>
+		<ImageView id="left" onSingletap="openLeft" />
 		<ImageView id="right" onSingletap="openRight"/>
 	</View>
 </Alloy>

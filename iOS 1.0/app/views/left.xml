@@ -3,9 +3,9 @@
         <View id="back" />
         <ImageView id="shadow" />
         <ImageView id="logo" onSingletap="closeLeft" />
-        <ImageView id="search_back">
-            <TextField id="search_field" onReturn="doSearch" />
-            <View id="search_button" onSingletap="doSearch" />
+        <ImageView id="search_back" onSingletap="searchTap">
+            <TextField id="search_field" onReturn="doSearch" onFocus="fieldFocus" onBlur="fieldBlur" />
+            <View id="search_button" />
         </ImageView>
         <TableView id="options" onClick="openSelection" />
     </View>

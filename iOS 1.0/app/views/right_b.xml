@@ -1,5 +1,5 @@
 <Alloy>
-	<View id="right_a">
+	<View id="right_b">
 		<ImageView id="top" />
 		<View class="primary" onSingletap="followTap">
 			<Label id="follow" class="primary_label"/>
@@ -7,5 +7,6 @@
 		<View class="primary" onSingletap="subscribeTap">
 			<Label id="subscribe" class="primary_label"/>
 		</View>
+		<ImageView id="bottom" />
 	</View>
 </Alloy>
