@@ -52,9 +52,7 @@ $.grid.addEventListener('clearFrame', function(e) {
 });
 
 $.grid.addEventListener('handleResponse', function(e) {
-	$.grid.more = false;
-
-	if ('streams' === $.grid.origin && e.response['stream'] === $.grid.stream && e.response['identifier'] === $.grid.identifier) {
+	if ('streams' === e.response['origin'] && e.response['stream_data']['stream'] === $.grid.stream && e.response['stream_data']['identifier'] === $.grid.identifier) {
 		for (var id in e.response['media_data']) {
 			Alloy.Globals.data.media[$.grid.index] = e.response['media_data'][id];
 
@@ -69,13 +67,14 @@ $.grid.addEventListener('handleResponse', function(e) {
 					index : $.grid.index
 				});
 			}
-
 			$.grid.index++;
-			$.grid.more = true;
 		}
+		
+		if(0 === e.response['media_data'].length)
+			$.grid.more = false;
 
 		$.grid.max_id = e.response['next_max_id'];
-	} else if (e.response['id_album'] === $.grid.id_album) {
+	} else if ('albums' === e.response['origin'] && e.response['id_album'] === $.grid.id_album) {
 		for (var id in e.response['media_data']) {
 			Alloy.Globals.data.media[$.grid.index] = e.response['media_data'][id];
 
@@ -87,6 +86,22 @@ $.grid.addEventListener('handleResponse', function(e) {
 
 			$.grid.index++;
 		}
+		
+		$.grid.more = false;
+	} else if ('likes' === e.response['origin']) {
+		for (var id in e.response['media_data']) {
+			Alloy.Globals.data.media[$.grid.index] = e.response['media_data'][id];
+
+			if (undefined === Alloy.Globals.data.frames[$.grid.index]) {
+				$.grid.fireEvent('newFrame', {
+					index : $.grid.index
+				});
+			}
+
+			$.grid.index++;
+		}
+		
+		$.grid.more = false;
 	}
 
 	$.grid.fireEvent('updateVisible');
@@ -120,27 +135,32 @@ $.grid.addEventListener('setOrigin', function(e) {
 		});
 	}
 
+	$.grid.max_id = null;
+	$.grid.loading = true;
+	$.grid.more = true;
+
 	switch($.grid.origin) {
 		case 'albums':
-			$.grid.loading = true;
 			Alloy.Globals.http.get('albums', {
 				id_album : $.grid.id_album
 			});
 			break;
+		case 'likes':
+			Alloy.Globals.http.get('likes/trending', {});
+			break;
 		case 'streams':
-			$.grid.max_id = null;
-			$.grid.more = false;
-
-			$.grid.loading = true;
 			Alloy.Globals.http.get('streams/instagram', {
 				stream : $.grid.stream,
 				identifier : $.grid.identifier
 			});
 			break;
 	}
+
+	Alloy.Globals.modules.flurry.logPageView();
 });
 
 $.grid.addEventListener('scrollEnd', function(e) {
+	$.grid.fireEvent('updateVisible');
 
 	for (var id in Alloy.Globals.data.visible) {
 		if (id < ($.grid.index_visible_top - 36) || id > ($.grid.index_visible_top + 48)) {
@@ -149,11 +169,6 @@ $.grid.addEventListener('scrollEnd', function(e) {
 			});
 		}
 	}
-
-	if (!$.grid.more && (Math.ceil($.grid.index / ($.grid.contentWidth / 256)) * 256) + 44 !== $.grid.contentHeight)
-		$.grid.contentHeight = (Math.ceil($.grid.index / ($.grid.contentWidth / 256)) * 256) + 44;
-
-	$.grid.fireEvent('updateVisible');
 });
 
 $.grid.addEventListener('click', function(e) {
@@ -201,6 +216,9 @@ $.grid.addEventListener('updateVisible', function(e) {
 			}
 		}
 
+		if (!$.grid.more && (Math.ceil($.grid.index / ($.grid.contentWidth / 256)) * 256) + 44 !== $.grid.contentHeight)
+			$.grid.contentHeight = (Math.ceil($.grid.index / ($.grid.contentWidth / 256)) * 256) + 44;
+
 		$.grid.scrolling = false;
 	}
 });
@@ -208,11 +226,15 @@ $.grid.addEventListener('updateVisible', function(e) {
 $.grid.addEventListener('scrollToPhoto', function(e) {
 	$.grid.offset_y = ((Math.ceil((e.media_index + 1) / ($.grid.contentWidth / 256)) * 256) - 512);
 
-	if ($.grid.offset_y > 0) {
-		$.grid.setContentOffset({
-			y : $.grid.offset_y
-		});
-	}
+	if ($.grid.offset_y > ($.grid.contentHeight - Alloy.Globals.height))
+		$.grid.offset_y = ($.grid.contentHeight - Alloy.Globals.height);
+
+	if ($.grid.offset_y < 0)
+		$.grid.offset_y = 0;
+
+	$.grid.setContentOffset({
+		y : $.grid.offset_y
+	});
 
 	$.grid.fireEvent('updateVisible');
 });

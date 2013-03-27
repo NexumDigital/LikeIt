@@ -1,0 +1,13 @@
+<Alloy>
+	<View id="block_code">
+		<View id="block"/>
+		<View id="border"/>
+		<View id="content">
+			<Label id="text_a">YOU ARE ON OUR RADAR NOW!</Label>
+			<Label id="text_b">and may receive a code soon</Label>
+			<Label id="text_c" onSingletap="blockMail">wrong mail?</Label>
+			<TextField id="code_input" onReturn="sendCode"/>
+			<ImageView id="btn_ok" onSingletap="sendCode"/>
+		</View>
+	</View>
+</Alloy>

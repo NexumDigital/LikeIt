@@ -8,5 +8,11 @@
             <View id="search_button" />
         </ImageView>
         <TableView id="options" onClick="openSelection" />
+        <View id="subscriber">
+        	<View id="border" />
+        	<ImageView id="profile_picture" />
+        	<Label id="username" />
+        	<ImageView id="logout" onSingletap="logoutTap"/>
+		</View>
     </View>
 </Alloy>

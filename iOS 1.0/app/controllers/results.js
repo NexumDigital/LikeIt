@@ -7,7 +7,7 @@ function openStream(e) {
 			Alloy.Globals.index.fireEvent('contentAction', {
 				kind : 'grid',
 				action : 'gridOpenStream',
-				param_icon : e.source.action,
+				param_id_stream : null,
 				param_title : e.source.selection['text'],
 				param_stream : e.source.action,
 				param_identifier : e.source.selection['id']

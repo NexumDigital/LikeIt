@@ -36,7 +36,11 @@
         <target device="mobileweb">false</target>
     </deployment-targets>
     <sdk-version>3.0.2.GA</sdk-version>
-    <modules/>
+    <modules>
+        <module platform="iphone">es.appio.twitterbook</module>
+        <module platform="iphone">com.onecowstanding.flurry</module>
+        <module platform="android">com.onecowstanding.flurry</module>
+    </modules>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

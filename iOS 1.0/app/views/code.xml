@@ -1,0 +1,12 @@
+<Alloy>
+	<View id="email">
+		<View id="block"/>
+		<View id="border"/>
+		<View id="content">
+			<Label id="text_a">REQUEST AN INVITATION</Label>
+			<Label id="text_b">access is limited right now</Label>
+			<TextField id="mail_input" onReturn="sendCode"/>
+			<ImageView id="btn_ok" onSingletap="sendMail"/>
+		</View>
+	</View>
+</Alloy>

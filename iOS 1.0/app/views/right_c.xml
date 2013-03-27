@@ -1,0 +1,12 @@
+<Alloy>
+	<View id="right_c">
+		<ImageView id="top" />
+		<View class="primary" onSingletap="renameTap">
+			<Label id="btn_rename" class="primary_label">RENAME ALBUM</Label>
+		</View>
+		<View class="primary" onSingletap="deleteTap">
+			<Label id="btn_delete" class="primary_label">DELETE ALBUM</Label>
+		</View>
+		<ImageView id="bottom" />
+	</View>
+</Alloy>

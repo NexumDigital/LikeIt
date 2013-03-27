@@ -1,4 +1,5 @@
 $.zoom_media.menu_albums = null;
+$.zoom_media.menu_share = null;
 
 function openLink(e) {
 	switch(e.source.action) {
@@ -14,7 +15,7 @@ function openLink(e) {
 			Alloy.Globals.index.fireEvent('contentAction', {
 				kind : 'grid',
 				action : 'gridOpenStream',
-				param_icon : e.source.action,
+				param_id_stream : null,
 				param_title : e.source.text,
 				param_stream : e.source.action,
 				param_identifier : e.source.identifier
@@ -26,13 +27,21 @@ function openLink(e) {
 }
 
 function likePhoto(e) {
-	$.media_overlay.opacity = 1;
-	
-	Alloy.Globals.http.post('likes', {
-		id_ig_media : Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['id_ig_media']
-	});
-
-	Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['liked'] = true;
+	if (Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['liked']) {
+		$.media_overlay.opacity = 0;
+		$.liked.image = 'zoom/btn_liked.png';
+		Alloy.Globals.http.del('likes', Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['id_ig_media']);
+		Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['liked'] = false;
+	} else {
+		if('media' === e.source.id) {
+			$.media_overlay.opacity = 1;
+		}
+		$.liked.image = 'zoom/btn_liked_on.png';
+		Alloy.Globals.http.post('likes', {
+			id_ig_media : Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['id_ig_media']
+		});
+		Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['liked'] = true;
+	}
 }
 
 function updateAlbumsSelected(selected_p) {
@@ -53,14 +62,20 @@ function updateAlbumsSelected(selected_p) {
 	}
 }
 
-
-
 function updateShareSelected(selected_p) {
 	if (selected_p) {
 		$.btn_share.image = 'zoom/btn_share_on.png';
+		if (null === $.zoom_media.menu_share) {
+			$.zoom_media.menu_share = Alloy.createController('zoom_share').getView();
+			$.zoom_media.add($.zoom_media.menu_share);
+		}
 		$.btn_share.selected = true;
 	} else {
 		$.btn_share.image = 'zoom/btn_share.png';
+		if (null !== $.zoom_media.menu_share) {
+			$.zoom_media.remove($.zoom_media.menu_share);
+			$.zoom_media.menu_share = null;
+		}
 		$.btn_share.selected = false;
 	}
 }
@@ -73,14 +88,10 @@ $.zoom_media.addEventListener('updatePhoto', function(e) {
 	$.btn_share.action = 'share';
 
 	if (Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['liked']) {
-
-	} else {
-
+		$.liked.image = 'zoom/btn_liked_on.png';
 	}
-
-	//if (Alloy.Globals.width < Alloy.Globals.height) {
-	$.scroll.details = Alloy.createController('zoom_details_a').getView();
+	
+	$.scroll.details = Alloy.createController('zoom_details').getView();
 	$.scroll.add($.scroll.details);
 	$.scroll.details.fireEvent('updateDetails');
-	//}
 });

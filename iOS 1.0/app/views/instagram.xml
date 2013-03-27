@@ -1,5 +1,7 @@
 <Alloy>
-    <View id="login">
-        <WebView id="instagram"/>
-    </View>
+	<View id="instagram">
+		<View id="block" onSingletap="requestLogin"/>
+		<ImageView id="logo"/>
+		<WebView id="web"/>
+	</View>
 </Alloy>

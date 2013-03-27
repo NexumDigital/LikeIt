@@ -5,6 +5,7 @@
 			<ImageView id="btn_share" />
 			<ImageView id="shadow" />
 		</View>
+		<ImageView id="liked" onSingletap="likePhoto" />
 		<ScrollView id="scroll">
 			<ImageView id="media" onDoubletap="likePhoto" />
 			<ImageView id="media_overlay" />

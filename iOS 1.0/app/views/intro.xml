@@ -1,0 +1,3 @@
+<Alloy>
+	<View id="intro" onClick="nextStep" onSwipe="nextStep"/>
+</Alloy>

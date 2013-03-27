@@ -1,20 +1,20 @@
 "#zoom_albums": {
     width : 260,
     height : Ti.UI.SIZE,
-    top : 46,
+    top : 49,
     left : 28,
     layout : 'horizontal',
     zIndex : 3
 },
 "#top": {
-	image : 'popup/top.png',
+	image : 'popup/top_zoom.png',
     width : 260,
     height : 20,
     top : 0,
     left : 0
 },
-".input": {
-	backgroundImage : 'popup/input.png',
+"#create_back": {
+	image : 'popup/input.png',
     width : 260,
     height : 65,
     top : 0,
@@ -36,15 +36,15 @@
     value : ''
 },
 "#btn_create": {
-	opacity : 0,
-	backgroundImage : 'popup/btn_create.png',
     width : 91,
     height : 65,
     top : 0,
     right : 0
 },
 "#list": {
+	disableBounce : true,
 	backgroundColor : 'transparent',
+	contentWidth : 260,
     width : 260,
     height : Ti.UI.SIZE,
     top : 0,
@@ -55,6 +55,6 @@
 	image : 'popup/bottom.png',
     width : 260,
     height : 7,
-    top : 0,
+    top : -1,
     left : 0
 },

@@ -1,0 +1,81 @@
+"#block_code" : {
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL,
+    zIndex : 30
+},
+"#block": {
+    backgroundColor : '#ffffff',
+    opacity : 0.4,
+    width : Ti.UI.FILL,
+    height : Ti.UI.FILL
+},
+"#border": {
+    backgroundColor : "#000000",
+    opacity : 0.6,
+    width : 532,
+    height : 282,
+    borderRadius : 10
+},
+"#content": {
+	backgroundImage : 'email/content_back.png',
+    width : 504,
+    height : 250,
+    borderRadius : 10
+},
+"#text_a": {
+    touchEnabled : false,
+    width : 500,
+    height : 30,
+    top : 50,
+    color : Alloy.CFG.ui_color,
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 24
+    },
+    textAlign : 'center'
+},
+"#text_b": {
+    touchEnabled : false,
+    width : 500,
+    height : 30,
+    top : 70,
+    color :  '#666666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14
+    },
+    textAlign : 'center'
+},
+"#code_input": {
+    autocapitalization : Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    hintText : 'insert your activation code',
+    width : 284,
+    height : 46,
+    bottom : 64,
+    left : 48,
+    color : '#666666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 18
+    },
+    returnKeyType : Ti.UI.RETURNKEY_DONE
+},
+"#btn_ok": {
+	image : 'email/btn_ok.png',
+    width : 112,
+    height : 48,
+    bottom : 63,
+    right : 28
+},
+"#text_c": {
+    width : 150,
+    height : 20,
+    right : 155,
+    bottom : 42,
+    color : Alloy.CFG.ui_color,
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14
+    },
+    textAlign : 'right'
+},

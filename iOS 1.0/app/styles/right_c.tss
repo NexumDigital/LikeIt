@@ -1,0 +1,42 @@
+"#right_c": {
+    width : 260,
+    height : Ti.UI.SIZE,
+    top : 46,
+    right : 0,
+    layout : 'horizontal',
+    zIndex : 15
+},
+"#top": {
+	image : 'popup/top.png',
+    width : 260,
+    height : 20,
+    top : 0,
+    left : 0
+},
+".primary": {
+	backgroundImage : 'popup/primary.png',
+    width : 260,
+    height : 65,
+    top : 0,
+    left : 0
+},
+".primary_label": {
+    touchEnabled : false,
+    width : 192,
+    height : 64,
+    top : 1,
+    left : 34,
+    color : '#666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14,
+        fontWeight : 'bold'
+    }
+},
+"#bottom": {
+	image : 'popup/bottom.png',
+    width : 260,
+    height : 7,
+    top : -1,
+    left : 0
+},

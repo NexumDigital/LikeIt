@@ -1,4 +1,7 @@
-if (undefined === Alloy.Globals.ui.streams[Alloy.Globals.stream['stream'] + '_' + Alloy.Globals.stream['identifier']]) {
+if ('saved' === Alloy.Globals.ui.stream['id_stream']) {
+	$.subscribe.text = 'STREAM SAVED';
+	$.subscribe.subscribed = false;
+} else if (null === Alloy.Globals.ui.stream['id_stream']) {
 	$.subscribe.text = 'SAVE STREAM';
 	$.subscribe.subscribed = false;
 } else {
@@ -7,21 +10,25 @@ if (undefined === Alloy.Globals.ui.streams[Alloy.Globals.stream['stream'] + '_' 
 }
 
 function subscribeTap() {
-	if ($.subscribe.subscribed) {
-		if (undefined !== Alloy.Globals.ui.streams[Alloy.Globals.stream['stream'] + '_' + Alloy.Globals.stream['identifier']]) {
-			Alloy.Globals.http.del('streams', Alloy.Globals.ui.streams[Alloy.Globals.stream['stream'] + '_' + Alloy.Globals.stream['identifier']]['id_stream']);
-			
-			$.subscribe.text = 'SAVE STREAM';
-			$.subscribe.subscribed = false;
-		}
+	if ($.subscribe.subscribed && null !== Alloy.Globals.ui.stream['id_stream']) {
+		Alloy.Globals.http.del('streams', Alloy.Globals.ui.stream['id_stream']);
+		
+		$.subscribe.text = 'SAVE STREAM';
+		$.subscribe.subscribed = false;
 	} else {
 		Alloy.Globals.http.post('streams', {
-			stream : Alloy.Globals.stream['stream'],
-			identifier : Alloy.Globals.stream['identifier'],
-			title : Alloy.Globals.stream['title']
+			stream : Alloy.Globals.ui.stream['stream'],
+			identifier : Alloy.Globals.ui.stream['identifier'],
+			title : Alloy.Globals.ui.stream['title']
 		});
 
-		$.subscribe.text = 'REMOVE STREAM';
-		$.subscribe.subscribed = true;
+		if (null === Alloy.Globals.ui.stream['id_stream']) {
+			Alloy.Globals.ui.stream['id_stream'] = 'saved';
+			$.subscribe.text = 'STREAM SAVED';
+			$.subscribe.subscribed = true;
+		} else {
+			$.subscribe.text = 'REMOVE STREAM';
+			$.subscribe.subscribed = true;
+		}
 	}
 }

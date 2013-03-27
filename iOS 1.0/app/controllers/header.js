@@ -8,10 +8,6 @@ function openRight() {
 	});
 }
 
-$.header.updateIcon = function(icon_p) {
-	//$.title_icon.image = 'header/icon_' + icon_p + '.png';
-}
-
 $.header.updateTitle = function(title_p) {
 	$.title_text.text = title_p.toUpperCase();
 }
@@ -20,6 +16,7 @@ $.header.updateRight = function(options_p) {
 	switch(options_p) {
 		case 'a' :
 		case 'b' :
+		case 'c' :
 			$.right.image = 'header/right.png';
 			break;
 		default :

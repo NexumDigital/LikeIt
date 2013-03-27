@@ -1,0 +1,6 @@
+"#intro" : {
+	backgroundColor : '#000',
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL,
+    zIndex : 40
+},

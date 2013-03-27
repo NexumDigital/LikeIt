@@ -1,5 +1,5 @@
 <Alloy>
-	<View id="zoom_details_a">
+	<View id="zoom_details">
 		<Label id="caption" />
 		<View id="details">
 			<View id="column_left">

@@ -1,3 +1,5 @@
 "#index": {
-    backgroundColor:'#fff'
+	backgroundColor : '#fff',
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL
 }

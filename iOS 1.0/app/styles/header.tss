@@ -25,15 +25,6 @@
     height : 44,
     layout:'horizontal'
 },
-"#title_icon": {
-    touchEnabled : false,
-    defaultImage : '',
-    image : '',
-    width : 44,
-    height : 44,
-    top : 0,
-    left : 0
-},
 "#title_text": {
     touchEnabled : false,
     width : Ti.UI.FILL,

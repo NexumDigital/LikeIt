@@ -6,7 +6,7 @@
 	left : 0,
 	backgroundColor : '#ebebeb'
 },
-"#zoom_details_a": {
+"#zoom_details": {
     top : 690,
     left : 0,
     width : 640,

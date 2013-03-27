@@ -1,5 +1,5 @@
 <Alloy>
-    <ScrollView id="grid" onSingletap="openZoom">
-        <View id="content"/>
+    <ScrollView id="grid">
+        <View id="content" onSingletap="openZoom"/>
     </ScrollView>
 </Alloy>

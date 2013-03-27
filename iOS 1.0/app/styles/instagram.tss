@@ -1,15 +1,17 @@
-"#login" : {
-    height : Ti.UI.FILL,
-    width : Ti.UI.FILL,
-    zIndex : 20
-},
-"#background" : {
-    backgroundColor : "#000",
-    opacity : 0.9,
-    height : Ti.UI.FILL,
-    width : Ti.UI.FILL
-},
 "#instagram" : {
     height : Ti.UI.FILL,
+    width : Ti.UI.FILL,
+    zIndex : 30
+},
+"#block": {
+    backgroundColor : '#f5f6f8',
+    width : Ti.UI.FILL,
     height : Ti.UI.FILL
+},
+"#web" : {
+	disableBounce : true,
+	scrollable : false,
+    backgroundColor : 'transparent',
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL
 },

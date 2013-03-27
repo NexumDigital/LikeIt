@@ -1,0 +1,37 @@
+"#input_title": {
+    width : Ti.UI.FILL,
+    height : Ti.UI.FILL,
+    zIndex : 20
+},
+"#block": {
+    backgroundColor : '#000000',
+    opacity : 0.8,
+    width : Ti.UI.FILL,
+    height : Ti.UI.FILL
+},
+"#content": {
+	backgroundImage : 'input/content_back.png',
+    width : 504,
+    height : 106
+},
+"#title_input": {
+    autocapitalization : Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    hintText : 'Album title',
+    width : 284,
+    height : 48,
+    bottom : 30,
+    left : 48,
+    color : '#666666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 18
+    },
+    returnKeyType : Ti.UI.RETURNKEY_DONE
+},
+"#btn_ok": {
+	image : 'email/btn_ok.png',
+    width : 112,
+    height : 48,
+    bottom : 29,
+    right : 28
+},

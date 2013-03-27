@@ -34,6 +34,13 @@
     top : 0,
     left : 0
 },
+"#liked": {
+	image : 'zoom/btn_liked.png',
+	width : 66,
+    height : 50,
+    top : 0,
+    zIndex : 3
+},
 "#scroll": {
     width : 640,
     height : Ti.UI.FILL,
@@ -50,6 +57,7 @@
     left : 14
 },
 "#media_overlay": {
+	touchEnabled : false,
     image : 'zoom/media_overlay.png',
 	opacity : 0,
     width : 612,

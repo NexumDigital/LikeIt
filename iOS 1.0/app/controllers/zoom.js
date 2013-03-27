@@ -1,3 +1,4 @@
+
 function closeZoom() {
 	Alloy.Globals.index.fireEvent('closeOverlay');
 }
@@ -59,6 +60,8 @@ $.zoom.addEventListener('openPhoto', function(e) {
 		$.zoom.slide_out.left = $.zoom.left_out;
 		Alloy.Globals.data.containers[$.zoom.prev_index].animate($.zoom.slide_out);
 	}
+	
+	Alloy.Globals.modules.flurry.logPageView();
 });
 
 $.zoom.slide_out.addEventListener('complete', function() {

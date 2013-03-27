@@ -1,0 +1,9 @@
+<Alloy>
+	<View id="input_title">
+		<View id="block" onSingletap="closeInput"/>
+		<View id="content">
+			<TextField id="title_input" onReturn="sendTitle"/>
+			<ImageView id="btn_ok" onSingletap="sendTitle"/>
+		</View>
+	</View>
+</Alloy>

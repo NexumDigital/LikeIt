@@ -14,11 +14,11 @@ $.cover_item.addEventListener('updateAlbum', function(e) {
 	$.cover_item.origin = 'albums';
 	
 	$.cover_item.id_album = e.id_album;
-	$.cover_item.title = e.title.toUpperCase();
+	$.cover_item.title = e.title;
 	
 	$.thumbnail.image = e.thumbnail;
 	
 	$.title.left = 16;
 	$.title.width = 224;
 	$.title.text = e.title.toUpperCase();
-}); 
+});
