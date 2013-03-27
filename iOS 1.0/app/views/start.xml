@@ -1,5 +1,0 @@
-<Alloy>
-    <View id="start" onSingletap="openLogin">
-        <ImageView id="logo"/>
-    </View>
-</Alloy>
