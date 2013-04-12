@@ -68,3 +68,41 @@ function followTap() {
 		$.follow.following = true;
 	}
 }
+
+$.right_b.alert = Titanium.UI.createAlertDialog({
+	title : 'You can paste the link now',
+	buttonNames : ['Got it!']
+});
+
+function facebookTap() {
+	Alloy.Globals.modules.twitterbook.post({
+		type : 'facebook',
+		message : 'I found this awesome profile thanks to http://facebook.com/applikeit',
+		urls : [Alloy.CFG.sh_url + Alloy.Globals.ui.stream['title'].replace('@', '')],
+		success : function() {
+		},
+		cancel : function() {
+		},
+		error : function(e) {
+		}
+	});
+}
+
+function twitterTap() {
+	Alloy.Globals.modules.twitterbook.post({
+		type : 'twitter',
+		message : 'I found this awesome profile thanks to @applikeit',
+		urls : [Alloy.CFG.sh_url + Alloy.Globals.ui.stream['title'].replace('@', '')],
+		success : function() {
+		},
+		cancel : function() {
+		},
+		error : function(e) {
+		}
+	});
+}
+
+function copyTap() {
+	Ti.UI.Clipboard.setText(Alloy.CFG.sh_url + Alloy.Globals.ui.stream['title'].replace('@', ''));
+	$.right_b.alert.show();
+}

@@ -1,9 +1,12 @@
 $.code_input.hasFocus = false;
 
+function closeBlock() {
+	Alloy.Globals.index.fireEvent('closeBlock');
+}
+
 function blockMail() {
-	Alloy.Globals.index.fireEvent('overlayAction', {
-		kind : 'block_email',
-		action : 'blockEmail'
+	Alloy.Globals.index.fireEvent('blockAction', {
+		kind : 'block_email'
 	});
 }
 
@@ -22,10 +25,7 @@ $.block_code.addEventListener('adjustContent', function(e) {
 	} else {
 		keyboard_height = 350;
 	}
-
-	$.border.animate(Ti.UI.createAnimation({
-		top : ((Alloy.Globals.height - $.border.height - ($.code_input.hasFocus ? keyboard_height : 0)) / 2)
-	}));
+	
 	$.content.animate(Ti.UI.createAnimation({
 		top : ((Alloy.Globals.height - $.content.height - ($.code_input.hasFocus ? keyboard_height : 0)) / 2)
 	}));

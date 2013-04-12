@@ -15,6 +15,7 @@ exports.get = function(path_p, params_p) {
 
 	http_client.onerror = function(e) {
 		Alloy.Globals.index.fireEvent('httpError', {
+			method : 'GET',
 			path : path_p,
 			params : params_p
 		});
@@ -44,6 +45,7 @@ exports.post = function(path_p, params_p) {
 
 	http_client.onerror = function(e) {
 		Alloy.Globals.index.fireEvent('httpError', {
+			method : 'POST',
 			path : path_p,
 			params : params_p
 		});
@@ -70,8 +72,9 @@ exports.del = function(path_p, id_p) {
 
 	http_client.onerror = function(e) {
 		Alloy.Globals.index.fireEvent('httpError', {
+			method : 'DELETE',
 			path : path_p,
-			params : id_p
+			id : id_p
 		});
 	}
 
@@ -96,7 +99,9 @@ exports.put = function(path_p, id_p, params_p) {
 
 	http_client.onerror = function(e) {
 		Alloy.Globals.index.fireEvent('httpError', {
+			method : 'PUT',
 			path : path_p,
+			id : id_p,
 			params : params_p
 		});
 	}

@@ -6,6 +6,7 @@
     left : 0
 },
 "#photo": {
+	defaultImage : 'results/no-user.jpg',
     width : 32,
     height : 32,
     top : 15,

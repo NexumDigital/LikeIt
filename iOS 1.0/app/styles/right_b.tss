@@ -33,6 +33,34 @@
         fontWeight : 'bold'
     }
 },
+".secondary": {
+	backgroundImage : 'popup/secondary.png',
+    width : 260,
+    height : 49,
+    top : 0,
+    left : 0
+},
+".icon_sm": {
+	touchEnabled : false,
+	defaultImage : '',
+    width : 82,
+    height : 49,
+    top : 0,
+    left : 0
+},
+".secondary_label": {
+    touchEnabled : false,
+    width : 176,
+    height : 49,
+    top : 0,
+    left : 82,
+    color : '#666',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 14,
+        fontWeight : 'bold'
+    }
+},
 "#bottom": {
 	image : 'popup/bottom.png',
     width : 260,

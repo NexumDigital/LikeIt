@@ -202,6 +202,11 @@ $.index.addEventListener('overlayAction', function(e) {
 
 	if (null !== $.index.ui_overlay && e.kind === $.index.ui_overlay.kind) {
 		switch(e.action) {
+			case 'errorOpen':
+				$.index.ui_overlay.fireEvent('updateMessage', {
+					message : e.param_message
+				});
+				break;
 			case 'inputTitle':
 				break;
 			case 'instagramOpenLogin':
@@ -246,6 +251,11 @@ $.index.closeOverlay = function() {
 $.index.openOverlay = function(kind_p) {
 	if (null === $.index.ui_overlay) {
 		switch(kind_p) {
+			case 'error':
+				$.index.ui_overlay = Alloy.createController('error').getView();
+				$.index.ui_overlay.kind = kind_p;
+				$.index.add($.index.ui_overlay);
+				break;
 			case 'input_title':
 				$.index.ui_overlay = Alloy.createController('input_title').getView();
 				$.index.ui_overlay.kind = kind_p;
@@ -389,8 +399,10 @@ $.index.addEventListener('httpHandler', function(e) {
 							profile_picture : e.response['user_data']['profile_picture'],
 							username : e.response['user_data']['username']
 						});
-						
+
 						Alloy.Globals.modules.push.register();
+						Alloy.Globals.http.get('albums', {});
+						Alloy.Globals.http.get('streams', {});
 						break;
 				}
 				break;
@@ -408,10 +420,11 @@ $.index.addEventListener('httpHandler', function(e) {
 						Ti.App.Properties.setString('id_session', e.response['id_session']);
 						Alloy.Globals.properties.id_session = e.response['id_session'];
 						Alloy.Globals.modules.flurry.setUserId(e.response['id_session'].toString());
-						
+
 						$.index.fireEvent('closeOverlay');
-						
-						Alloy.Globals.modules.push.register();
+
+						Alloy.Globals.http.get('albums', {});
+						Alloy.Globals.http.get('streams', {});
 						break;
 					case 'streams':
 						Alloy.Globals.http.get('streams', {});
@@ -435,6 +448,12 @@ $.index.addEventListener('httpHandler', function(e) {
 				}
 				break;
 		}
+	} else {
+		$.index.fireEvent('overlayAction', {
+			kind : 'error',
+			action : 'errorOpen',
+			param_message : e.response['message']
+		});
 	}
 
 	switch(e.response['trigger']) {
@@ -456,13 +475,14 @@ $.index.addEventListener('httpHandler', function(e) {
 			});
 			break;
 	}
-
-	Ti.API.info(e.response['message']);
 });
 
 $.index.addEventListener('httpError', function(e) {
-	Ti.API.info(e.path);
-	Ti.API.info(e.params);
+	$.index.fireEvent('overlayAction', {
+		kind : 'error',
+		action : 'errorOpen',
+		param_message : 'Lost internet connection :('
+	});
 });
 
 Ti.Gesture.addEventListener('orientationchange', function(e) {
@@ -476,7 +496,7 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 					y : $.index.ui_content.media_offset
 				});
 			}
-			
+
 			if (Ti.UI.SIZE !== $.index.ui_content.contentHeight)
 				$.index.ui_content.contentHeight = (Math.ceil($.index.ui_content.index / ($.index.ui_content.contentWidth / 256)) * 256) + 44;
 		}

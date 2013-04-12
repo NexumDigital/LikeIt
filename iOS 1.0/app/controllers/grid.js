@@ -42,6 +42,11 @@ $.grid.addEventListener('setFrame', function(e) {
 		Alloy.Globals.data.frames[e.index].image = Alloy.Globals.data.media[e.index]['urls']['306'];
 		Alloy.Globals.data.frames[e.index].index = e.index;
 		Alloy.Globals.data.visible[e.index] = e.index;
+	} else if (!$.grid.is_public && undefined !== Alloy.Globals.data.frames[e.index] && 16 > e.index) {
+		Alloy.Globals.data.frames[e.index].backgroundColor = '#eeeeee';
+		Alloy.Globals.data.frames[e.index].image = 'http://cdn.nexum.ws/likeit/v1/blur/'+e.index+'.png';
+		Alloy.Globals.data.frames[e.index].index = e.index;
+		Alloy.Globals.data.visible[e.index] = e.index;
 	}
 });
 
@@ -70,7 +75,17 @@ $.grid.addEventListener('handleResponse', function(e) {
 			$.grid.index++;
 		}
 		
-		if(0 === e.response['media_data'].length)
+		$.grid.is_public = e.response['is_public'];
+		
+		if(!$.grid.is_public){
+			Alloy.Globals.index.fireEvent('overlayAction', {
+				kind : 'error',
+				action : 'errorOpen',
+				param_message : 'THIS IS A PRIVATE PROFILE'
+			});
+		}
+		
+		if (0 === e.response['media_data'].length)
 			$.grid.more = false;
 
 		$.grid.max_id = e.response['next_max_id'];
@@ -86,7 +101,7 @@ $.grid.addEventListener('handleResponse', function(e) {
 
 			$.grid.index++;
 		}
-		
+
 		$.grid.more = false;
 	} else if ('likes' === e.response['origin']) {
 		for (var id in e.response['media_data']) {
@@ -100,7 +115,7 @@ $.grid.addEventListener('handleResponse', function(e) {
 
 			$.grid.index++;
 		}
-		
+
 		$.grid.more = false;
 	}
 
@@ -138,6 +153,7 @@ $.grid.addEventListener('setOrigin', function(e) {
 	$.grid.max_id = null;
 	$.grid.loading = true;
 	$.grid.more = true;
+	$.grid.is_public = true;
 
 	switch($.grid.origin) {
 		case 'albums':

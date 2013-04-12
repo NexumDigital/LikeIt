@@ -2,10 +2,10 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>mobi.nexum.likeit</id>
     <name>Like it!</name>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <publisher>NexumDigital Inc.</publisher>
     <url>http://likeit.co/</url>
-    <description>Photos like you'venever seen before</description>
+    <description>The best way to experience, discover, track and collect Instagram photos on the iPad.</description>
     <copyright>2013 by NexumDigital Inc.</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>

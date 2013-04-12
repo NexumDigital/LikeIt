@@ -20,12 +20,20 @@
     top : 0,
     left : 0
 },
+".icon": {
+	touchEnabled : false,
+	defaultImage : '',
+    width : 80,
+    height : 65,
+    top : 0,
+    left : 0
+},
 ".primary_label": {
     touchEnabled : false,
     width : 192,
     height : 64,
     top : 1,
-    left : 34,
+    left : 80,
     color : '#666',
     font : {
         fontFamily : Alloy.CFG.ui_font,
@@ -37,6 +45,6 @@
 	image : 'popup/bottom.png',
     width : 260,
     height : 7,
-    top : 0,
+    top : -1,
     left : 0
 },

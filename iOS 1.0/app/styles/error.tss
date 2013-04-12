@@ -1,0 +1,22 @@
+"#error" : {
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL,
+    zIndex : 10
+},
+"#block": {
+    backgroundColor : '#000000',
+    opacity : 0.8,
+    width : Ti.UI.FILL,
+    height : Ti.UI.FILL
+},
+"#message": {
+    touchEnabled : false,
+    width : 640,
+    height : 640,
+    color : '#ffffff',
+    font : {
+        fontFamily : Alloy.CFG.ui_font,
+        fontSize : 24
+    },
+    textAlign : 'center'
+},

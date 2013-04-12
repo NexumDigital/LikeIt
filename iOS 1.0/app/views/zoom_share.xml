@@ -2,13 +2,16 @@
 	<View id="zoom_share">
 		<ImageView id="top" />
 		<View class="primary" onSingletap="facebookTap">
-			<Label id="subscribe" class="primary_label">Facebook</Label>
+			<ImageView class="icon" image="popup/icon_facebook.png" />
+			<Label class="primary_label">Facebook</Label>
 		</View>
 		<View class="primary" onSingletap="twitterTap">
-			<Label id="subscribe" class="primary_label">Twitter</Label>
+			<ImageView class="icon" image="popup/icon_twitter.png" />
+			<Label class="primary_label">Twitter</Label>
 		</View>
 		<View class="primary" onSingletap="copyTap">
-			<Label id="subscribe" class="primary_label">Copy link</Label>
+			<ImageView class="icon" image="popup/icon_copy.png" />
+			<Label class="primary_label">Copy link</Label>
 		</View>
 		<ImageView id="bottom" />
 	</View>

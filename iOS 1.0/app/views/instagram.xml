@@ -1,7 +1,7 @@
 <Alloy>
 	<View id="instagram">
 		<View id="block" onSingletap="requestLogin"/>
-		<ImageView id="logo"/>
 		<WebView id="web"/>
+		<ImageView id="cancel" onSingletap="tapCancel"/>
 	</View>
 </Alloy>

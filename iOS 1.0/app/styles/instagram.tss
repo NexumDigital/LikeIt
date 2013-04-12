@@ -15,3 +15,9 @@
     height : Ti.UI.FILL,
     width : Ti.UI.FILL
 },
+"#cancel" : {
+	image : 'intro/cancel.png',
+    width : 112,
+    height : 49,
+    bottom : 30
+},

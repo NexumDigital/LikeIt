@@ -24,7 +24,7 @@ var fade_header_out = Ti.UI.createAnimation({
 });
 var slide_up = Ti.UI.createAnimation({
 	duration : 500,
-	bottom : 0
+	bottom : -6
 });
 var current_step = 1;
 
@@ -42,15 +42,17 @@ function nextStep() {
 		case 1:
 			backs[1] = Ti.UI.createImageView({
 				opacity : 0,
-				image : 'intro/back_1.png',
-				height : 1024,
+				image : 'intro/back_1.jpg',
+				top : 0,
+				height : 768,
 				width : 1024
 			});
 			screens[1] = Ti.UI.createImageView({
-				bottom : -504,
-				image : 'intro/slide_1.png',
-				height : 504,
-				width : 848
+				bottom : -470,
+				image : 'intro/slide_1.jpg',
+				height : 470,
+				width : 768,
+				borderRadius : 6
 			});
 			headers[1] = Ti.UI.createImageView({
 				opacity : 0,
@@ -69,15 +71,17 @@ function nextStep() {
 			headers[1].animate(fade_header_out);
 			backs[2] = Ti.UI.createImageView({
 				opacity : 0,
-				image : 'intro/back_2.png',
-				height : 1024,
+				image : 'intro/back_2.jpg',
+				top : 0,
+				height : 768,
 				width : 1024
 			});
 			screens[2] = Ti.UI.createImageView({
-				bottom : -504,
-				image : 'intro/slide_2.png',
-				height : 504,
-				width : 848
+				bottom : -470,
+				image : 'intro/slide_2.jpg',
+				height : 470,
+				width : 768,
+				borderRadius : 6
 			});
 			headers[2] = Ti.UI.createImageView({
 				opacity : 0,
@@ -96,15 +100,17 @@ function nextStep() {
 			headers[2].animate(fade_header_out);
 			backs[3] = Ti.UI.createImageView({
 				opacity : 0,
-				image : 'intro/back_3.png',
-				height : 1024,
+				image : 'intro/back_3.jpg',
+				top : 0,
+				height : 768,
 				width : 1024
 			});
 			screens[3] = Ti.UI.createImageView({
-				bottom : -504,
-				image : 'intro/slide_3.png',
-				height : 504,
-				width : 848
+				bottom : -470,
+				image : 'intro/slide_3.jpg',
+				height : 470,
+				width : 768,
+				borderRadius : 6
 			});
 			headers[3] = Ti.UI.createImageView({
 				opacity : 0,
@@ -123,15 +129,17 @@ function nextStep() {
 			headers[3].animate(fade_header_out);
 			backs[4] = Ti.UI.createImageView({
 				opacity : 0,
-				image : 'intro/back_4.png',
-				height : 1024,
+				image : 'intro/back_4.jpg',
+				top : 0,
+				height : 768,
 				width : 1024
 			});
 			screens[4] = Ti.UI.createImageView({
-				bottom : -504,
-				image : 'intro/slide_4.png',
-				height : 504,
-				width : 848
+				bottom : -470,
+				image : 'intro/slide_4.jpg',
+				height : 470,
+				width : 768,
+				borderRadius : 6
 			});
 			headers[4] = Ti.UI.createImageView({
 				opacity : 0,
@@ -150,7 +158,8 @@ function nextStep() {
 			headers[4].animate(fade_header_out);
 			backs[5] = Ti.UI.createImageView({
 				opacity : 0,
-				image : 'intro/back_5.png',
+				image : 'intro/back_5.jpg',
+				top : 0,
 				height : 1024,
 				width : 1024
 			});
@@ -169,7 +178,8 @@ function nextStep() {
 		case 6:
 			backs[6] = Ti.UI.createImageView({
 				opacity : 0,
-				image : 'intro/back_6.png',
+				image : 'intro/back_6.jpg',
+				top : 0,
 				height : 1024,
 				width : 1024
 			});
@@ -179,7 +189,8 @@ function nextStep() {
 		case 7:
 			backs[7] = Ti.UI.createImageView({
 				opacity : 0,
-				image : 'intro/back_7.png',
+				image : 'intro/back_7.jpg',
+				top : 0,
 				height : 1024,
 				width : 1024
 			});

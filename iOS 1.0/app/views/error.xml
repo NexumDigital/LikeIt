@@ -1,0 +1,6 @@
+<Alloy>
+	<View id="error">
+		<View id="block" onSingletap="closeOverlay"/>
+		<Label id="message"/>
+	</View>
+</Alloy>

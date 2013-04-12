@@ -1,5 +1,9 @@
 $.mail_input.hasFocus = false;
 
+function closeBlock() {
+	Alloy.Globals.index.fireEvent('closeBlock');
+}
+
 function sendMail(e) {
 	if ('' !== $.mail_input.value) {
 		Alloy.Globals.http.post('subscribers/email', {
@@ -16,7 +20,6 @@ $.block_email.addEventListener('adjustContent', function(e) {
 		keyboard_height = 350;
 	}
 	
-	$.border.animate(Ti.UI.createAnimation({ top : ((Alloy.Globals.height - $.border.height - ($.mail_input.hasFocus ? keyboard_height : 0))/2)}));
 	$.content.animate(Ti.UI.createAnimation({ top : ((Alloy.Globals.height - $.content.height - ($.mail_input.hasFocus ? keyboard_height : 0))/2)}));
 });
 

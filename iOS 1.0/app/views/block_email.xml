@@ -1,10 +1,9 @@
 <Alloy>
 	<View id="block_email">
-		<View id="block"/>
-		<View id="border"/>
+		<View id="block" onSingletap="closeBlock"/>
 		<View id="content">
-			<Label id="text_a">REQUEST AN INVITATION</Label>
-			<Label id="text_b">access is limited right now</Label>
+			<Label id="text_a">WELCOME TO LIKE IT!</Label>
+			<Label id="text_b">insert your email and get in touch</Label>
 			<TextField id="mail_input"/>
 			<ImageView id="btn_ok" onSingletap="sendMail"/>
 		</View>

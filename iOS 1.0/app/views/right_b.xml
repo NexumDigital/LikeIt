@@ -1,6 +1,21 @@
 <Alloy>
 	<View id="right_b">
 		<ImageView id="top" />
+		<View class="primary" backgroundImage="popup/primary_selected.png">
+			<Label class="primary_label">SHARE</Label>
+		</View>
+		<View class="secondary" onSingletap="facebookTap">
+			<ImageView class="icon_sm" image="popup/icon_sm_facebook.png" />
+			<Label class="secondary_label">Facebook</Label>
+		</View>
+		<View class="secondary" onSingletap="twitterTap">
+			<ImageView class="icon_sm" image="popup/icon_sm_twitter.png" />
+			<Label class="secondary_label">Twitter</Label>
+		</View>
+		<View class="secondary" backgroundImage="popup/secondary_bottom.png" onSingletap="copyTap">
+			<ImageView class="icon_sm" image="popup/icon_sm_copy.png" />
+			<Label class="secondary_label">Copy link</Label>
+		</View>
 		<View class="primary" onSingletap="followTap">
 			<Label id="follow" class="primary_label"/>
 		</View>

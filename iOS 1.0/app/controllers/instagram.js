@@ -1,5 +1,12 @@
 $.instagram.current_event = 'requestLogin';
 
+function tapCancel() {
+	Alloy.Globals.index.fireEvent('blockAction', {
+		kind : 'intro'
+	});
+	$.instagram.fireEvent('requestLogin');
+}
+
 function requestLogin() {
 	$.instagram.fireEvent('requestLogin');
 }
@@ -61,10 +68,11 @@ $.web.addEventListener('load', function(e) {
 				Alloy.Globals.properties.id_session = '';
 				Ti.App.Properties.setString('code', '');
 				Alloy.Globals.properties.code = '';
-				
+
 				Alloy.Globals.index.fireEvent('blockAction', {
 					kind : 'intro'
 				});
+				$.instagram.fireEvent('requestLogin');
 				break;
 		}
 

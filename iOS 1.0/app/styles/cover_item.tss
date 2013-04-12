@@ -8,7 +8,7 @@
 "#thumbnail" : {
 	touchEnabled : false,
 	backgroundColor : '#eeeeee',
-	defaultImage : '',
+	defaultImage : 'cover/thumb_default.png',
 	image : '',
 	left : 4,
 	top : 4,

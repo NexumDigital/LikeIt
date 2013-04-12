@@ -5,7 +5,7 @@ $.cover_item.addEventListener('updateStream', function(e) {
 	$.cover_item.identifier = e.identifier;
 	$.cover_item.title = e.title.toUpperCase();
 	$.cover_item.icon = e.icon;
-	$.thumbnail.image = e.thumbnail;
+	$.thumbnail.image = (undefined === e.thumbnail)? 'cover/thumb_default.png' : e.thumbnail;
 	$.icon.image = 'cover/icon_' + e.icon + '.png';
 	$.title.text = e.title.toUpperCase();
 });
