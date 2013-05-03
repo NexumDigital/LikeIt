@@ -1,0 +1,6 @@
+"#solid" : {
+	backgroundColor : '#ffffff',
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL,
+    zIndex : 20
+},

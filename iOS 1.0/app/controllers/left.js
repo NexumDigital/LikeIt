@@ -199,12 +199,12 @@ function doSearch(e) {
 
 		Alloy.Globals.http.get('streams/search', {
 			stream : 'tags',
-			q : $.search_field.value
+			q : ($.search_field.value.replace(/[^a-zA-Z0-9\_]/g, '')).toLowerCase()
 		});
 
 		Alloy.Globals.http.get('streams/search', {
 			stream : 'users',
-			q : $.search_field.value
+			q : ($.search_field.value.replace(/[^a-zA-Z0-9\_]/g, '')).toLowerCase()
 		});
 	}
 
@@ -236,9 +236,9 @@ function logoutTap(e){
 		kind : 'intro'
 	});
 	
-	Alloy.Globals.index.fireEvent('overlayAction', {
-		kind : 'instagram',
-		action : 'instagramOpenLogout'
+	Alloy.Globals.index.fireEvent('blockAction', {
+		kind : 'block_insta',
+		action : 'instaLogout'
 	});
 	
 	closeLeft();

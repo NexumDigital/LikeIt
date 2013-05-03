@@ -29,7 +29,7 @@
     returnKeyType : Ti.UI.RETURNKEY_DONE
 },
 "#btn_ok": {
-	image : 'email/btn_ok.png',
+	image : 'input/btn_ok.png',
     width : 112,
     height : 48,
     bottom : 29,

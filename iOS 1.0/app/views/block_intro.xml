@@ -1,0 +1,9 @@
+<Alloy>
+	<View id="block_intro">
+		<View id="back"/>
+		<View id="content">
+			<ImageView id="title" />
+			<ImageView id="start" onSingletap="startTap" />
+		</View>
+	</View>
+</Alloy>

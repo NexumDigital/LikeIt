@@ -15,6 +15,7 @@ Alloy.Globals.properties.id_session = Ti.App.Properties.getString('id_session', 
 Alloy.Globals.properties.code = Ti.App.Properties.getString('code', '');
 Alloy.Globals.properties.username = Ti.App.Properties.getString('username', '');
 Alloy.Globals.properties.profile_picture = Ti.App.Properties.getString('profile_picture', '');
+Alloy.Globals.properties.email = Ti.App.Properties.getString('email', '');
 
 Alloy.Globals.http = require('http');
 
@@ -58,6 +59,8 @@ Alloy.Globals.modules.flurry.appVersion = Ti.App.version;
 Alloy.Globals.modules.flurry.sessionReportsOnPauseEnabled = true;
 Alloy.Globals.modules.flurry.sessionReportsOnCloseEnabled = true;
 Alloy.Globals.modules.flurry.startSession(Alloy.CFG.fl_key);
+if ('' !== Alloy.Globals.properties.id_session)
+	Alloy.Globals.modules.flurry.setUserId(Alloy.Globals.properties.id_session);
 
 Alloy.Globals.modules.push = {};
 Alloy.Globals.modules.push.register = function() {

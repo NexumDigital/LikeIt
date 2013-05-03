@@ -74,3 +74,7 @@ $.zoom.slide_out.addEventListener('complete', function() {
 	Alloy.Globals.data.containers[$.zoom.prev_index] = null;
 	$.zoom.sliding = false;
 });
+
+$.zoom.addEventListener('adjustContent', function(e) {
+	Alloy.Globals.data.containers[Alloy.Globals.ui.zoom_index].left = ((Alloy.Globals.width - 640) / 2);
+});

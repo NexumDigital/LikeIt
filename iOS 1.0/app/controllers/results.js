@@ -18,26 +18,6 @@ function openStream(e) {
 	}
 }
 
-$.results.addEventListener('adjustWidth', function(e) {
-	if (Alloy.Globals.width < Alloy.Globals.height) {
-		$.tags.width = 256;
-		$.people.width = 256;
-		$.places.width = 256;
-
-		$.tags.height = Alloy.Globals.height - 44;
-		$.people.height = Alloy.Globals.height - 44;
-		$.places.height = Alloy.Globals.height - 44;
-	} else {
-		$.tags.width = 352;
-		$.people.width = 352;
-		$.places.width = 320;
-
-		$.tags.height = Alloy.Globals.height - 44;
-		$.people.height = Alloy.Globals.height - 44;
-		$.places.height = Alloy.Globals.height - 44;
-	}
-});
-
 $.results.addEventListener('handleResults', function(e) {
 	switch(e.response['stream']) {
 		case 'locations':
@@ -73,3 +53,25 @@ $.results.addEventListener('handleResults', function(e) {
 			break;
 	}
 });
+
+$.results.addEventListener('adjustContent', function(e) {
+	if (Alloy.Globals.width < Alloy.Globals.height) {
+		$.tags.width = 256;
+		$.people.width = 256;
+		$.places.width = 256;
+
+		$.tags.height = Alloy.Globals.height - 44;
+		$.people.height = Alloy.Globals.height - 44;
+		$.places.height = Alloy.Globals.height - 44;
+	} else {
+		$.tags.width = 352;
+		$.people.width = 352;
+		$.places.width = 320;
+
+		$.tags.height = Alloy.Globals.height - 44;
+		$.people.height = Alloy.Globals.height - 44;
+		$.places.height = Alloy.Globals.height - 44;
+	}
+});
+
+$.results.fireEvent('adjustContent');

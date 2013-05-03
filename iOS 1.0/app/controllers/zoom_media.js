@@ -28,14 +28,14 @@ function openLink(e) {
 
 function likePhoto(e) {
 	if (Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['liked']) {
-		$.media_overlay.opacity = 0;
+		$.heart.opacity = 0;
 		$.liked.image = 'zoom/btn_liked.png';
 		Alloy.Globals.http.del('likes', Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['id_ig_media']);
 		Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['liked'] = false;
 	} else {
-		if('media' === e.source.id) {
-			$.media_overlay.opacity = 1;
-		}
+		$.heart.opacity = 1;
+		$.heart.animate(Ti.UI.createAnimation({duration : 1000, opacity : 0}));
+		
 		$.liked.image = 'zoom/btn_liked_on.png';
 		Alloy.Globals.http.post('likes', {
 			id_ig_media : Alloy.Globals.data.media[Alloy.Globals.ui.zoom_index]['id_ig_media']

@@ -1,16 +1,16 @@
 $.mail_input.hasFocus = false;
+$.mail_input.value = Alloy.Globals.properties.email;
 
-function closeBlock() {
-	Alloy.Globals.index.fireEvent('closeBlock');
-}
-
-function sendMail(e) {
+function sendEmail(e) {
 	if ('' !== $.mail_input.value) {
 		Alloy.Globals.http.post('subscribers/email', {
 			email : $.mail_input.value
 		});
+		
+		Alloy.Globals.properties.email = $.mail_input.value;
 	}
 }
+
 
 $.block_email.addEventListener('adjustContent', function(e) {
 	var keyboard_height;
@@ -25,10 +25,14 @@ $.block_email.addEventListener('adjustContent', function(e) {
 
 $.mail_input.addEventListener('focus', function(e){
 	$.mail_input.hasFocus = true;
+	
 	$.block_email.fireEvent('adjustContent');
 });
 
 $.mail_input.addEventListener('blur', function(e){
 	$.mail_input.hasFocus = false;
+	
 	$.block_email.fireEvent('adjustContent');
 });
+
+$.block_email.fireEvent('adjustContent');

@@ -1,11 +1,10 @@
 <Alloy>
 	<View id="block_email">
-		<View id="block" onSingletap="closeBlock"/>
 		<View id="content">
-			<Label id="text_a">WELCOME TO LIKE IT!</Label>
-			<Label id="text_b">insert your email and get in touch</Label>
-			<TextField id="mail_input"/>
-			<ImageView id="btn_ok" onSingletap="sendMail"/>
+			<ImageView id="title" />
+			<View id="input_back" />
+			<TextField id="mail_input" onReturn="sendEmail"/>
+			<ImageView id="btn_ok" onSingletap="sendEmail"/>
 		</View>
 	</View>
 </Alloy>

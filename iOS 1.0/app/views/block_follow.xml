@@ -1,0 +1,8 @@
+<Alloy>
+	<View id="block_follow">
+		<View id="content">
+			<ImageView id="title" />
+			<ImageView id="follow" onSingletap="followTap" />
+		</View>
+	</View>
+</Alloy>

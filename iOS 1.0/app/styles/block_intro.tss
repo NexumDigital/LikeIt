@@ -1,0 +1,22 @@
+"#block_intro" : {
+	backgroundColor : Alloy.CFG.ui_color,
+    height : Ti.UI.FILL,
+    height : Ti.UI.FILL,
+    zIndex : 40
+},
+"#content" : {
+    width : 768,
+    height : 220
+},
+"#title" : {
+    image : 'blocks/title_1.png',
+    top : 0,
+    width : 768,
+    height : 130
+},
+"#start" : {
+    image : 'blocks/btn_start.png',
+    bottom : 2,
+    width : 112,
+    height : 48
+}

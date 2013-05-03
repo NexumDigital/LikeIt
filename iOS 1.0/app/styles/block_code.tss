@@ -1,74 +1,55 @@
 "#block_code" : {
     height : Ti.UI.FILL,
-    width : Ti.UI.FILL,
-    zIndex : 30
+    height : Ti.UI.FILL,
+    zIndex : 40
 },
-"#block": {
-    backgroundColor : '#000000',
-    opacity : 0.8,
-    width : Ti.UI.FILL,
-    height : Ti.UI.FILL
+"#content" : {
+    width : 768,
+    height : 220
 },
-"#content": {
-	backgroundImage : 'email/content_back.png',
-    width : 504,
-    height : 250,
-    borderRadius : 3
+"#title" : {
+    image : 'blocks/title_4.png',
+    top : 0,
+    width : 768,
+    height : 130
 },
-"#text_a": {
-    touchEnabled : false,
-    width : 500,
-    height : 30,
-    top : 50,
-    color : Alloy.CFG.ui_color,
-    font : {
-        fontFamily : Alloy.CFG.ui_font,
-        fontSize : 24
-    },
-    textAlign : 'center'
-},
-"#text_b": {
-    touchEnabled : false,
-    width : 500,
-    height : 30,
-    top : 70,
-    color :  '#666666',
-    font : {
-        fontFamily : Alloy.CFG.ui_font,
-        fontSize : 14
-    },
-    textAlign : 'center'
+"#input_back" : {
+    backgroundColor : Alloy.CFG.ui_color,
+    bottom : 0,
+    left : 160,
+    width : 320,
+    height : 1
 },
 "#code_input": {
     autocapitalization : Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
-    hintText : 'confirmation code',
-    width : 284,
+    bottom : 2,
+    left : 176,
+    width : 286,
     height : 46,
-    bottom : 64,
-    left : 48,
     color : '#666666',
     font : {
         fontFamily : Alloy.CFG.ui_font,
         fontSize : 18
     },
-    returnKeyType : Ti.UI.RETURNKEY_DONE
+    returnKeyType : Ti.UI.RETURNKEY_DONE,
+    hintText : 'access code'
 },
 "#btn_ok": {
-	image : 'email/btn_ok.png',
+	image : 'blocks/btn_ok.png',
     width : 112,
     height : 48,
-    bottom : 63,
-    right : 28
+    bottom : 1,
+    right : 160
 },
-"#text_c": {
-    width : 150,
-    height : 20,
-    right : 155,
-    bottom : 42,
-    color : Alloy.CFG.ui_color,
+"#back": {
+    width : 400,
+    height : 50,
+    bottom : 30,
+    color : '#666666',
     font : {
         fontFamily : Alloy.CFG.ui_font,
-        fontSize : 14
+        fontSize : 14,
+        fontWeight : 'bold'
     },
-    textAlign : 'right'
-},
+    textAlign : 'center'
+}

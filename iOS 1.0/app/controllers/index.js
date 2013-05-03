@@ -207,14 +207,6 @@ $.index.addEventListener('overlayAction', function(e) {
 					message : e.param_message
 				});
 				break;
-			case 'inputTitle':
-				break;
-			case 'instagramOpenLogin':
-				$.index.ui_overlay.fireEvent('requestLogin');
-				break;
-			case 'instagramOpenLogout':
-				$.index.ui_overlay.fireEvent('requestLogout');
-				break;
 			case 'zoomOpenPhoto':
 				Alloy.Globals.ui.zoom_index = e.param_index;
 				$.index.ui_overlay.fireEvent('openPhoto');
@@ -261,19 +253,18 @@ $.index.openOverlay = function(kind_p) {
 				$.index.ui_overlay.kind = kind_p;
 				$.index.add($.index.ui_overlay);
 				break;
-			case 'instagram':
-				$.index.ui_overlay = Alloy.createController('instagram').getView();
-				$.index.ui_overlay.kind = kind_p;
-				$.index.add($.index.ui_overlay);
-				break;
 			case 'results':
 				$.index.ui_overlay = Alloy.createController('results').getView();
 				$.index.ui_overlay.kind = kind_p;
-				$.index.ui_overlay.fireEvent('adjustWidth');
 				$.index.add($.index.ui_overlay);
 				break;
 			case 'start':
 				$.index.ui_overlay = Alloy.createController('start').getView();
+				$.index.ui_overlay.kind = kind_p;
+				$.index.add($.index.ui_overlay);
+				break;
+			case 'solid':
+				$.index.ui_overlay = Alloy.createController('solid').getView();
 				$.index.ui_overlay.kind = kind_p;
 				$.index.add($.index.ui_overlay);
 				break;
@@ -287,11 +278,24 @@ $.index.openOverlay = function(kind_p) {
 }
 
 $.index.addEventListener('blockAction', function(e) {
+	$.index.openOverlay('solid');
+	
 	if (null === $.index.ui_block) {
 		$.index.openBlock(e.kind);
 	} else if (e.kind !== $.index.ui_block.kind) {
 		$.index.closeBlock();
 		$.index.openBlock(e.kind);
+	}
+	
+	if (null !== $.index.ui_block && e.kind === $.index.ui_block.kind) {
+		switch(e.action) {
+			case 'instaLogin':
+				$.index.ui_block.fireEvent('requestLogin');
+				break;
+			case 'instaLogout':
+				$.index.ui_block.fireEvent('requestLogout');
+				break;
+		}
 	}
 });
 
@@ -300,6 +304,8 @@ $.index.addEventListener('closeBlock', function() {
 		$.index.remove($.index.ui_block);
 		$.index.ui_block = null;
 	}
+	
+	$.index.closeOverlay();
 });
 
 $.index.closeBlock = function() {
@@ -322,8 +328,18 @@ $.index.openBlock = function(kind_p) {
 				$.index.ui_block.kind = kind_p;
 				$.index.add($.index.ui_block);
 				break;
-			case 'intro':
-				$.index.ui_block = Alloy.createController('intro').getView();
+			case 'block_follow':
+				$.index.ui_block = Alloy.createController('block_follow').getView();
+				$.index.ui_block.kind = kind_p;
+				$.index.add($.index.ui_block);
+				break;
+			case 'block_insta':
+				$.index.ui_block = Alloy.createController('block_insta').getView();
+				$.index.ui_block.kind = kind_p;
+				$.index.add($.index.ui_block);
+				break;
+			case 'block_intro':
+				$.index.ui_block = Alloy.createController('block_intro').getView();
 				$.index.ui_block.kind = kind_p;
 				$.index.add($.index.ui_block);
 				break;
@@ -416,15 +432,19 @@ $.index.addEventListener('httpHandler', function(e) {
 							profile_picture : e.response['user_data']['profile_picture'],
 							username : e.response['user_data']['username']
 						});
-
-						Ti.App.Properties.setString('id_session', e.response['id_session']);
-						Alloy.Globals.properties.id_session = e.response['id_session'];
-						Alloy.Globals.modules.flurry.setUserId(e.response['id_session'].toString());
-
-						$.index.fireEvent('closeOverlay');
-
-						Alloy.Globals.http.get('albums', {});
-						Alloy.Globals.http.get('streams', {});
+						
+						if(undefined === e.response['trigger']){
+							$.index.fireEvent('closeBlock');
+							
+							Ti.App.Properties.setString('id_session', e.response['id_session']);
+							Alloy.Globals.properties.id_session = e.response['id_session'];
+							Alloy.Globals.modules.flurry.setUserId(e.response['id_session'].toString());
+							
+							Alloy.Globals.modules.push.register();
+							
+							Alloy.Globals.http.get('albums', {});
+							Alloy.Globals.http.get('streams', {});
+						}
 						break;
 					case 'streams':
 						Alloy.Globals.http.get('streams', {});
@@ -433,9 +453,10 @@ $.index.addEventListener('httpHandler', function(e) {
 						$.index.fireEvent('blockAction', {
 							kind : 'block_code'
 						});
+						
+						Ti.App.Properties.setString('email', Alloy.Globals.properties.email);
 						break;
 					case 'subscribers/invite':
-						Ti.API.info(e.response);
 						$.index.fireEvent('closeBlock');
 						break;
 				}
@@ -449,24 +470,19 @@ $.index.addEventListener('httpHandler', function(e) {
 				break;
 		}
 	} else {
-		$.index.fireEvent('overlayAction', {
-			kind : 'error',
-			action : 'errorOpen',
-			param_message : e.response['message']
-		});
+		alert(e.response['message']);
 	}
 
 	switch(e.response['trigger']) {
 		case 'no_session':
-		case 'login':
-			$.index.fireEvent('overlayAction', {
-				kind : 'instagram',
-				action : 'instagramOpenLogin'
+			$.index.fireEvent('blockAction', {
+				kind : 'block_insta',
+				action : 'instaLogin'
 			});
 			break;
 		case 'no_email':
 			$.index.fireEvent('blockAction', {
-				kind : 'block_email'
+				kind : 'block_follow'
 			});
 			break;
 		case 'no_code':
@@ -478,11 +494,7 @@ $.index.addEventListener('httpHandler', function(e) {
 });
 
 $.index.addEventListener('httpError', function(e) {
-	$.index.fireEvent('overlayAction', {
-		kind : 'error',
-		action : 'errorOpen',
-		param_message : 'Lost internet connection :('
-	});
+	alert('Lost internet connection :(');
 });
 
 Ti.Gesture.addEventListener('orientationchange', function(e) {
@@ -507,17 +519,7 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 	}
 
 	if (null !== $.index.ui_overlay) {
-		if ('results' === $.index.ui_overlay.kind) {
-			$.index.ui_overlay.fireEvent('adjustWidth');
-		}
-
-		if ('zoom' === $.index.ui_overlay.kind) {
-			Alloy.Globals.data.containers[Alloy.Globals.ui.zoom_index].left = ((Alloy.Globals.width - 640) / 2);
-		}
-
-		if ('input_title' === $.index.ui_overlay.kind) {
-			$.index.ui_overlay.fireEvent('adjustContent');
-		}
+		$.index.ui_overlay.fireEvent('adjustContent');
 	}
 
 	if (null !== $.index.ui_block) {
@@ -526,11 +528,8 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 });
 
 if ('' === Alloy.Globals.properties.id_session) {
-	$.index.openBlock('intro');
-	$.index.fireEvent('overlayAction', {
-		kind : 'instagram',
-		action : 'instagramOpenLogin'
-	});
+	$.index.openOverlay('solid');
+	$.index.openBlock('block_intro');
 } else {
 	Alloy.Globals.http.get('sessions', {
 		id_session : Alloy.Globals.properties.id_session,
@@ -547,4 +546,4 @@ if ('' === Alloy.Globals.properties.id_session) {
 	});
 }
 
-$.index.open();
+$.index.open(); 

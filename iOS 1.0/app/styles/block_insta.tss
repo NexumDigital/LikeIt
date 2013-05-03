@@ -1,0 +1,18 @@
+"#block_insta" : {
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL,
+    zIndex : 30
+},
+"#web" : {
+	disableBounce : true,
+	scrollable : false,
+    backgroundColor : 'transparent',
+    height : Ti.UI.FILL,
+    width : Ti.UI.FILL
+},
+"#cancel" : {
+	image : 'blocks/btn_cancel.png',
+    width : 112,
+    height : 48,
+    bottom : 30
+},

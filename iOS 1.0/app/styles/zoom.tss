@@ -15,6 +15,6 @@
     image : '',
     width : 612,
     height : 612,
-    bottom : -612,
-    right : -612
-},
+    bottom : '-612',
+    right : '-612'
+}

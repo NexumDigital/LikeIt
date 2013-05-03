@@ -56,12 +56,12 @@
     top : 62,
     left : 14
 },
-"#media_overlay": {
+"#heart": {
 	touchEnabled : false,
-    image : 'zoom/media_overlay.png',
+    image : 'zoom/heart.png',
 	opacity : 0,
-    width : 612,
-    height : 612,
-    top : 62,
-    left : 14
+    width : 112,
+    height : 96,
+    top : 320,
+    left : 264
 },

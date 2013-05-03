@@ -19,6 +19,16 @@ function sendTitle(e) {
 	}
 }
 
+$.title_input.addEventListener('focus', function(e) {
+	$.title_input.hasFocus = true;
+	$.input_title.fireEvent('adjustContent');
+});
+
+$.title_input.addEventListener('blur', function(e) {
+	$.title_input.hasFocus = false;
+	$.input_title.fireEvent('adjustContent');
+});
+
 $.input_title.addEventListener('adjustContent', function(e) {
 	var keyboard_height;
 	if (Alloy.Globals.width < Alloy.Globals.height) {
@@ -30,14 +40,4 @@ $.input_title.addEventListener('adjustContent', function(e) {
 	$.content.animate(Ti.UI.createAnimation({
 		top : ((Alloy.Globals.height - $.content.height - ($.title_input.hasFocus ? keyboard_height : 0)) / 2)
 	}));
-});
-
-$.title_input.addEventListener('focus', function(e) {
-	$.title_input.hasFocus = true;
-	$.input_title.fireEvent('adjustContent');
-});
-
-$.title_input.addEventListener('blur', function(e) {
-	$.title_input.hasFocus = false;
-	$.input_title.fireEvent('adjustContent');
 });

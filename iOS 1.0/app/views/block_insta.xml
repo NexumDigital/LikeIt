@@ -1,0 +1,6 @@
+<Alloy>
+	<View id="block_insta">
+		<WebView id="web"/>
+		<ImageView id="cancel" onSingletap="tapCancel"/>
+	</View>
+</Alloy>

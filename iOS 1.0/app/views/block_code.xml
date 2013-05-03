@@ -1,12 +1,11 @@
 <Alloy>
 	<View id="block_code">
-		<View id="block" onSingletap="closeBlock"/>
 		<View id="content">
-			<Label id="text_a">DID YOU RECEIVE OUR EMAIL?</Label>
-			<Label id="text_b">please insert you confirmation code</Label>
-			<Label id="text_c" onSingletap="blockMail">wrong mail?</Label>
+			<ImageView id="title" />
+			<View id="input_back" />
 			<TextField id="code_input" onReturn="sendCode"/>
 			<ImageView id="btn_ok" onSingletap="sendCode"/>
 		</View>
+		<Label id="back" onSingletap="backTap" />
 	</View>
 </Alloy>
