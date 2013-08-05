@@ -71,7 +71,6 @@ $.web.addEventListener('load', function(e) {
 				$.block_insta.fireEvent('requestLogin');
 				break;
 		}
-
 	}
 });
 
@@ -80,12 +79,6 @@ $.web.addEventListener('error', function(e) {
 });
 
 $.block_insta.addEventListener('requestLogin', function(e) {
-	Alloy.Globals.index.fireEvent('contentAction', {
-		kind : 'grid',
-		action : 'gridOpenLikes',
-		param_title : 'Explore'
-	});
-	
 	$.block_insta.current_event = 'requestLogin';
 	$.web.url = 'https://api.instagram.com/oauth/authorize/?client_id=' + Alloy.CFG.ig_client_id + '&redirect_uri=' + Alloy.CFG.ig_callback + '&response_type=code&scope=relationships+likes+comments&display=touch';
 });

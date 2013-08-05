@@ -15,7 +15,7 @@ $.grid.style_frame = {
 	height : 254
 };
 
-for (var i; i < 250; i++) {
+for (var i; i < 1000; i++) {
 	$.grid.fireEvent('newFrame', {
 		index : i
 	});
@@ -198,12 +198,15 @@ $.grid.addEventListener('dragEnd', function(e) {
 $.grid.addEventListener('updateVisible', function(e) {
 	if (!$.grid.scrolling) {
 		$.grid.scrolling = true;
-
+		
 		$.grid.offset_y = (0 <= ($.grid.contentOffset.y - 1024)) ? ($.grid.contentOffset.y - 1024) : 0;
 		$.grid.index_visible_top = (Math.ceil($.grid.contentWidth / 256) * Math.floor($.grid.offset_y / 256));
 		$.grid.going_down = (0 >= ($.grid.index_visible_top_prev - $.grid.index_visible_top)) ? true : false;
 		$.grid.index_visible_top_prev = $.grid.index_visible_top;
-
+		
+		if(0 === $.grid.offset_y)
+			$.grid.going_down = true;
+		
 		switch($.grid.going_down) {
 			case true:
 				for (var i = $.grid.index_visible_top; i < ($.grid.index_visible_top + 48); i++) {

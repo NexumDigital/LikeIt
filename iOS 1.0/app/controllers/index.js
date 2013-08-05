@@ -409,8 +409,6 @@ $.index.addEventListener('httpHandler', function(e) {
 						});
 						break;
 					case 'sessions':
-						Ti.API.info(e.response);
-
 						$.index.ui_left.fireEvent('updateSubscriber', {
 							profile_picture : e.response['user_data']['profile_picture'],
 							username : e.response['user_data']['username']
@@ -527,22 +525,13 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 	}
 });
 
-if ('' === Alloy.Globals.properties.id_session) {
-	$.index.openOverlay('solid');
-	$.index.openBlock('block_intro');
-} else {
+if ('' !== Alloy.Globals.properties.id_session) {
 	Alloy.Globals.http.get('sessions', {
 		id_session : Alloy.Globals.properties.id_session,
 		id_install : Ti.Platform.id,
 		client : Ti.App.id,
 		version : Ti.App.version,
 		code : Alloy.Globals.properties.code
-	});
-
-	$.index.fireEvent('contentAction', {
-		kind : 'grid',
-		action : 'gridOpenLikes',
-		param_title : 'Explore'
 	});
 }
 
